@@ -82,6 +82,26 @@ int dios_ssp_process_api(void* ptr, short* mic_buf, short* ref_buf,
             short* out_buf, objSSP_Param *SSP_PARAM);
 
 /**********************************************************************************
+Function:      // dios_ssp_doa_result_get_api
+Description:   // get DOA result on processed frames
+Input:         // ptr: dios speech signal process pointer
+                  SSP_PARAM:
+Output:        // none
+Return:        // success: return DOA float angle value, failure: return ERROR_DOA
+**********************************************************************************/
+float dios_ssp_doa_result_get_api(void* ptr, objSSP_Param *SSP_PARAM);
+
+/**********************************************************************************
+Function:      // dios_ssp_vad_result_get_api
+Description:   // get VAD result on processed frames
+Input:         // ptr: dios speech signal process pointer
+                  SSP_PARAM:
+Output:        // none
+Return:        // success: return VAD status value, failure: return ERROR_VAD
+**********************************************************************************/
+int dios_ssp_vad_result_get_api(void* ptr, objSSP_Param *SSP_PARAM);
+
+/**********************************************************************************
 Function:      // dios_ssp_uninit_api
 Description:   // free dios speech signal process module
 Input:         // ptr: dios speech signal process pointer

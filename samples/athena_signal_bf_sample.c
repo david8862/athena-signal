@@ -3,9 +3,9 @@
 // https://blog.csdn.net/weixin_49337111/article/details/134229333
 //
 // build & run with following cmd:
-// $ gcc -Wall -O2 -o athena_signal_bf_example athena_signal_bf_example.c -I<header file path> -L<lib file path> -lathenasignal -lm
-// $ ./athena_signal_bf_example -h
-// Usage: athena_signal_test
+// $ gcc -Wall -O2 -o athena_signal_bf_sample athena_signal_bf_sample.c -I<header file path> -L<lib file path> -lathenasignal -lm
+// $ ./athena_signal_bf_sample -h
+// Usage: athena_signal_bf_sample
 // --input_file, -i: input multi-channel audio file. default: 'input.wav'
 // --bf_type, -b: type of beamforming, 1 for MVDR and 2 for GSC. default: 1
 // --mic_num, -m: number of mics. default: 3
@@ -13,7 +13,7 @@
 // --chunk_size, -c: audio chunk size. default: 128
 // --output_file, -o: output wav file for enhanced audio. default: output.wav
 //
-// $ ./athena_signal_bf_example -i 3channels.wav -b 2 -m 3 -o test.pcm
+// $ ./athena_signal_bf_sample -i 3channels.wav -b 2 -m 3 -o test.pcm
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +44,7 @@ void show_progressbar(int progress, int total, int barWidth)
 }
 
 
-int athena_signal_bf_example(char* input_file, int bf_type, int mic_num, float* mic_coord, float loc_phi, int chunk_size, char* output_file)
+int athena_signal_bf_sample(char* input_file, int bf_type, int mic_num, float* mic_coord, float loc_phi, int chunk_size, char* output_file)
 {
     int ret;
 
@@ -120,7 +120,7 @@ int athena_signal_bf_example(char* input_file, int bf_type, int mic_num, float* 
         }
 
         // dios ssp processing
-        ret = dios_ssp_process_api(st, ptr_input_data, ptr_ref_data, ptr_output_data, SSP_PARAM) != OK_AUDIO_PROCESS;
+        ret = dios_ssp_process_api(st, ptr_input_data, ptr_ref_data, ptr_output_data, SSP_PARAM);
         if (ret != OK_AUDIO_PROCESS) {
             printf("dios_ssp_process_api return error %d on frame %ld, exit process!\n", ret, i);
             fclose(fp_input);
@@ -156,13 +156,32 @@ int athena_signal_bf_example(char* input_file, int bf_type, int mic_num, float* 
     return 0;
 }
 
+void parse_mic_coord(char* mic_coord_file, float* mic_coord, int mic_num)
+{
+    // parse mic array 3D coordinate (x,y,z) from txt file, one line per mic and
+    // x-axis point to right, y-axis point to front and z-axis point to up.
+    // the coordinate unit is meters, like follow:
+    //
+    // 0.0,-0.0277,0.0
+    // 0.024,0.0138575,0.0
+    // -0.024,0.0138575,0.0
+    //
+    FILE* fp_mic_coord = fopen(mic_coord_file, "rb");
+    for(int i=0; i < mic_num; i++) {
+        fscanf(fp_mic_coord, "%f,%f,%f", &(mic_coord[3*i]), &(mic_coord[3*i+1]), &(mic_coord[3*i+2]));
+    }
+
+    fclose(fp_mic_coord);
+    return;
+}
 
 void display_usage()
 {
-    printf("Usage: athena_signal_test\n" \
+    printf("Usage: athena_signal_bf_sample\n" \
            "--input_file, -i: input multi-channel audio file. default: 'input.wav'\n" \
            "--bf_type, -b: type of beamforming, 1 for MVDR and 2 for GSC. default: 1\n" \
            "--mic_num, -m: number of mics. default: 3\n" \
+           "--mic_coord_file, -f: mics coordinate text file. default: mic_coord.txt\n" \
            "--loc_phi, -l: source location azimuth (in degrees). default: 90.0\n" \
            "--chunk_size, -c: audio chunk size. default: 128\n" \
            "--output_file, -o: output pcm file for enhanced audio. default: output.pcm\n" \
@@ -176,6 +195,7 @@ int main(int argc, char** argv)
     char input_file[MAX_STR_LEN] = "input.wav";
     int bf_type = 1;
     int mic_num = 3;
+    char mic_coord_file[MAX_STR_LEN] = "mic_coord.txt";
     float* mic_coord;
     float loc_phi = 90.0;
     int chunk_size = 128;
@@ -187,6 +207,7 @@ int main(int argc, char** argv)
             {"input_file", required_argument, NULL, 'i'},
             {"bf_type", required_argument, NULL, 'b'},
             {"mic_num", required_argument, NULL, 'm'},
+            {"mic_coord_file", required_argument, NULL, 'f'},
             {"loc_phi", required_argument, NULL, 'l'},
             {"chunk_size", required_argument, NULL, 'c'},
             {"output_file", required_argument, NULL, 'o'},
@@ -195,7 +216,7 @@ int main(int argc, char** argv)
 
         /* getopt_long stores the option index here. */
         int option_index = 0;
-        c = getopt_long(argc, argv, "b:c:hi:l:m:o:", long_options, &option_index);
+        c = getopt_long(argc, argv, "b:c:f:hi:l:m:o:", long_options, &option_index);
 
         /* Detect the end of the options. */
         if (c == -1) break;
@@ -206,6 +227,10 @@ int main(int argc, char** argv)
                 break;
             case 'c':
                 chunk_size = strtol(optarg, NULL, 10);
+                break;
+            case 'f':
+                memset(mic_coord_file, 0, MAX_STR_LEN);
+                strcpy(mic_coord_file, optarg);
                 break;
             case 'i':
                 memset(input_file, 0, MAX_STR_LEN);
@@ -231,8 +256,10 @@ int main(int argc, char** argv)
     }
 
     // alloc memory for mic coordinate
-    // here we just assign some fake coordinate to make both MVDR & GSC work, not sure why...
     mic_coord = malloc(mic_num*3*sizeof(float));
+    parse_mic_coord(mic_coord_file, mic_coord, mic_num);
+#if 0
+    // here we just assign some fake coordinate to make both MVDR & GSC work, not sure why...
     if (bf_type == 1) {
         for(int i=0; i < mic_num; i++) {
             mic_coord[3*i] = 1.0;
@@ -242,9 +269,10 @@ int main(int argc, char** argv)
     } else if (bf_type == 2) {
         memset(mic_coord, 0, mic_num*3*sizeof(float));
     }
+#endif
 
     printf("NOTE: Athena-signal lib only support 16k sample rate, 16-bit audio data!\n");
-    athena_signal_bf_example(input_file, bf_type, mic_num, mic_coord, loc_phi, chunk_size, output_file);
+    athena_signal_bf_sample(input_file, bf_type, mic_num, mic_coord, loc_phi, chunk_size, output_file);
 
     free(mic_coord);
     printf("\nProcess finished.\n");

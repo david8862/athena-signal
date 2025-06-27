@@ -13,12 +13,39 @@ add_definitions(-DATHENASIGNAL_VERSION=${ATHENASIGNAL_TARGET_VERSION})
 #set(CMAKE_CXX_STANDARD 17)
 include(GNUInstallDirs)
 
-if (TEST_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC")
+# https://www.zhihu.com/question/27090458
+# https://blog.csdn.net/m0_37870649/article/details/109139204
+option(ATHENASIGNAL_BUILD_FAST "build lib & binary with gcc -Ofast optimization" OFF)
+option(ATHENASIGNAL_BUILD_TEST_COVERAGE "build lib & binary for test coverage" OFF)
+option(ATHENASIGNAL_BUILD_ASAN "build lib & binary for asan analysis" OFF)
+option(ATHENASIGNAL_BUILD_FOR_GPROF "build lib & binary for gprof analysis" OFF)
+
+# --- [ Add some build optimization
+if (ATHENASIGNAL_BUILD_FAST)
+    message(STATUS "Build with gcc -Ofast optimization")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -Wall")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast -Wall")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall -g")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -g")
 endif()
 
-if (BUILD_ASAN)
+if (ATHENASIGNAL_BUILD_TEST_COVERAGE)
+    message(STATUS "Add flags in build for test coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -fPIC")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage -fPIC")
+endif()
+
+if (ATHENASIGNAL_BUILD_ASAN)
+    message(STATUS "Add flags in build for asan analysis")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize-recover=address -fno-var-tracking -fno-omit-frame-pointer -fno-stack-protector")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address -fsanitize-recover=address -fno-var-tracking -fno-omit-frame-pointer -fno-stack-protector")
+endif()
+
+if(ATHENASIGNAL_BUILD_FOR_GPROF)
+    message(STATUS "Add '-pg' in build for gprof analysis")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
 endif()
 
 set(LIBATHENASIGNAL athenasignal)
@@ -29,9 +56,9 @@ add_library(${LIBATHENASIGNAL} SHARED ${LIBATHENASIGNAL_SRCS})
 target_include_directories(${LIBATHENASIGNAL} PUBLIC ${CMAKE_HOME_DIRECTORY}/athena_signal/)
 
 
-# --- [ Build examples
-file (GLOB EXAMPLE_SRCS   ${CMAKE_HOME_DIRECTORY}/examples/*.c)
-foreach (source ${EXAMPLE_SRCS})
+# --- [ Build samples
+file (GLOB SAMPLE_SRCS   ${CMAKE_HOME_DIRECTORY}/samples/*.c)
+foreach (source ${SAMPLE_SRCS})
   get_filename_component(name ${source} NAME_WE)
   add_executable(${name} ${source})
   target_include_directories(${name} PRIVATE ${CMAKE_HOME_DIRECTORY}/athena_signal/kernels)
@@ -76,5 +103,5 @@ install(FILES ${LIBATHENASIGNAL_MVDR_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDI
 install(FILES ${LIBATHENASIGNAL_NS_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_ns)
 install(FILES ${LIBATHENASIGNAL_VAD_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_vad)
 
-set(ATHENASIGNAL_EXAMPLES athena_signal_bf_example)
-install(TARGETS ${ATHENASIGNAL_EXAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/examples)
+set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample)
+install(TARGETS ${ATHENASIGNAL_SAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/samples)

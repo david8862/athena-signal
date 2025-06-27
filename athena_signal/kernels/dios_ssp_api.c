@@ -324,6 +324,31 @@ int dios_ssp_process_api(void* ptr, short* mic_buf, short* ref_buf, short* out_b
     return 0;
 }
 
+float dios_ssp_doa_result_get_api(void* ptr, objSSP_Param *SSP_PARAM)
+{
+    if(ptr == NULL) {
+        return ERROR_DOA;
+    }
+
+    if(SSP_PARAM->DOA_KEY != 1) {
+        return ERROR_DOA;
+    }
+
+    objDios_ssp* srv = (objDios_ssp*)ptr;
+    return srv->cfg_wakeup_loc_phi;
+}
+
+int dios_ssp_vad_result_get_api(void* ptr, objSSP_Param *SSP_PARAM)
+{
+    if(ptr == NULL) {
+        return ERROR_VAD;
+    }
+
+    objDios_ssp* srv = (objDios_ssp*)ptr;
+    return srv->vad_result;
+}
+
+
 int dios_ssp_uninit_api(void* ptr, objSSP_Param *SSP_PARAM)
 {
     if(ptr == NULL)

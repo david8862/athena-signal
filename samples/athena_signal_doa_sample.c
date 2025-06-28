@@ -4,16 +4,13 @@
 //
 // build & run with following cmd:
 // $ gcc -Wall -O2 -o athena_signal_doa_sample athena_signal_doa_sample.c -I<header file path> -L<lib file path> -lathenasignal -lm
-// $ ./athena_signal_doa_sample -h
+// $ ./install/bin/samples/athena_signal_doa_sample -h
 // Usage: athena_signal_doa_sample
 // --input_file, -i: input multi-channel audio file. default: 'input.wav'
-// --bf_type, -b: type of beamforming, 1 for MVDR and 2 for GSC. default: 1
 // --mic_num, -m: number of mics. default: 3
-// --loc_phi, -l: source location azimuth (in degrees). default: 90.0
-// --chunk_size, -c: audio chunk size. default: 128
-// --output_file, -o: output wav file for enhanced audio. default: output.wav
+// --mic_coord_file, -f: mics coordinate text file. default: mic_coord.txt
 //
-// $ ./athena_signal_doa_sample -i 3channels.wav -b 2 -m 3 -o test.pcm
+// $ ./athena_signal_doa_sample -i 3channels.wav -m 3 -f mic_coord.txt
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,6 +20,7 @@
 #include "dios_ssp_return_defs.h"
 
 #define MAX_STR_LEN 128
+#define FRAME_SIZE (128)  // athena-signal use hard-coded frame size
 
 
 void show_progressbar(int progress, int total, int barWidth)
@@ -44,7 +42,7 @@ void show_progressbar(int progress, int total, int barWidth)
 }
 
 
-int athena_signal_doa_sample(char* input_file, int mic_num, float* mic_coord, int chunk_size)
+int athena_signal_doa_sample(char* input_file, int mic_num, float* mic_coord)
 {
     int ret=0;
     float angle=0.0;
@@ -89,30 +87,30 @@ int athena_signal_doa_sample(char* input_file, int mic_num, float* mic_coord, in
     // re-direct file pointer back to head
     rewind(fp_input);
 
-    // calculate audio frame number based on chunk size
-    long frame_num = sample_num / chunk_size;
+    // calculate audio frame number based on frame size
+    long frame_num = sample_num / FRAME_SIZE;
     printf("frame number is %ld\n", frame_num);
 
     // prepare data buffers
-    short *ptr_input_data = (short*)calloc(mic_num*chunk_size, sizeof(short));
-    short *ptr_temp = (short*)calloc(mic_num*chunk_size, sizeof(short));
-    short *ptr_output_data = (short*)calloc(chunk_size,sizeof(short));
-    short *ptr_ref_data = (short*)calloc(chunk_size, sizeof(short));
+    short *ptr_input_data = (short*)calloc(mic_num*FRAME_SIZE, sizeof(short));
+    short *ptr_temp = (short*)calloc(mic_num*FRAME_SIZE, sizeof(short));
+    short *ptr_output_data = (short*)calloc(FRAME_SIZE,sizeof(short));
+    short *ptr_ref_data = (short*)calloc(FRAME_SIZE, sizeof(short));
 
     // set ref signal as 0 (DOA don't need it)
-    memset(ptr_ref_data, 0, chunk_size*sizeof(short));
+    memset(ptr_ref_data, 0, FRAME_SIZE*sizeof(short));
 
     // signal processing here
     for(long i=0; i < frame_num; i++) {
         // read data from input file
-        fread(ptr_temp, sizeof(short), mic_num*chunk_size, fp_input);
+        ret = fread(ptr_temp, sizeof(short), mic_num*FRAME_SIZE, fp_input);
 
         // since layout of multi-channel audio data in .wav audio is interleave,
         // but athena-signal lib only handle non-interleave layout data,
         // so we need convert audio data from interleave to non-interleave
-        for(int j=0; j < chunk_size; j++) {
+        for(int j=0; j < FRAME_SIZE; j++) {
             for(int k=0; k < mic_num; k++) {
-                ptr_input_data[j+k*chunk_size] = ptr_temp[mic_num*j+k];
+                ptr_input_data[j+k*FRAME_SIZE] = ptr_temp[mic_num*j+k];
             }
         }
 
@@ -120,6 +118,7 @@ int athena_signal_doa_sample(char* input_file, int mic_num, float* mic_coord, in
         ret = dios_ssp_process_api(st, ptr_input_data, ptr_ref_data, ptr_output_data, SSP_PARAM);
         if (ret != OK_AUDIO_PROCESS) {
             printf("dios_ssp_process_api return error %d on frame %ld, exit process!\n", ret, i);
+            dios_ssp_uninit_api(st, SSP_PARAM);
             fclose(fp_input);
             free(ptr_input_data);
             free(ptr_temp);
@@ -179,7 +178,6 @@ void display_usage()
            "--input_file, -i: input multi-channel audio file. default: 'input.wav'\n" \
            "--mic_num, -m: number of mics. default: 3\n" \
            "--mic_coord_file, -f: mics coordinate text file. default: mic_coord.txt\n" \
-           "--chunk_size, -c: audio chunk size. default: 128\n" \
            "\n");
     return;
 }
@@ -191,7 +189,6 @@ int main(int argc, char** argv)
     int mic_num = 3;
     char mic_coord_file[MAX_STR_LEN] = "mic_coord.txt";
     float* mic_coord;
-    int chunk_size = 128;
 
     int c;
     while (1) {
@@ -199,21 +196,17 @@ int main(int argc, char** argv)
             {"input_file", required_argument, NULL, 'i'},
             {"mic_num", required_argument, NULL, 'm'},
             {"mic_coord_file", required_argument, NULL, 'f'},
-            {"chunk_size", required_argument, NULL, 'c'},
             {"help", no_argument, NULL, 'h'},
             {NULL, 0, NULL, 0}};
 
         /* getopt_long stores the option index here. */
         int option_index = 0;
-        c = getopt_long(argc, argv, "c:f:hi:m:", long_options, &option_index);
+        c = getopt_long(argc, argv, "f:hi:m:", long_options, &option_index);
 
         /* Detect the end of the options. */
         if (c == -1) break;
 
         switch (c) {
-            case 'c':
-                chunk_size = strtol(optarg, NULL, 10);
-                break;
             case 'f':
                 memset(mic_coord_file, 0, MAX_STR_LEN);
                 strcpy(mic_coord_file, optarg);
@@ -239,7 +232,7 @@ int main(int argc, char** argv)
     parse_mic_coord(mic_coord_file, mic_coord, mic_num);
 
     printf("NOTE: Athena-signal lib only support 16k sample rate, 16-bit audio data!\n");
-    athena_signal_doa_sample(input_file, mic_num, mic_coord, chunk_size);
+    athena_signal_doa_sample(input_file, mic_num, mic_coord);
 
     free(mic_coord);
     printf("\nProcess finished.\n");

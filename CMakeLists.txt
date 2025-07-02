@@ -13,6 +13,9 @@ add_definitions(-DATHENASIGNAL_VERSION=${ATHENASIGNAL_TARGET_VERSION})
 #set(CMAKE_CXX_STANDARD 17)
 include(GNUInstallDirs)
 
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
+
 # https://www.zhihu.com/question/27090458
 # https://blog.csdn.net/m0_37870649/article/details/109139204
 option(ATHENASIGNAL_BUILD_FAST "build lib & binary with gcc -Ofast optimization" OFF)
@@ -103,5 +106,5 @@ install(FILES ${LIBATHENASIGNAL_MVDR_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDI
 install(FILES ${LIBATHENASIGNAL_NS_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_ns)
 install(FILES ${LIBATHENASIGNAL_VAD_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_vad)
 
-set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample)
+set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample athena_signal_hpf_sample)
 install(TARGETS ${ATHENASIGNAL_SAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/samples)

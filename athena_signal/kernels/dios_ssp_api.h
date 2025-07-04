@@ -17,6 +17,10 @@ limitations under the License.
 #ifndef _DIOS_SSP_API_H_
 #define _DIOS_SSP_API_H_
 
+#ifdef  __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,9 +33,9 @@ limitations under the License.
 #include "./dios_ssp_doa/dios_ssp_doa_api.h"
 #include "./dios_ssp_gsc/dios_ssp_gsc_api.h"
 
-typedef struct 
+typedef struct
 {
-	short AEC_KEY;
+    short AEC_KEY;
     short NS_KEY;
     short AGC_KEY;
     short HPF_KEY;
@@ -43,7 +47,7 @@ typedef struct
     PlaneCoord mic_coord[16];
     float loc_phi;
 } objSSP_Param;
-    
+
 /**********************************************************************************
 Function:      // dios_ssp_init_api
 Description:   // init with SSP_PARAM and allocate memory
@@ -53,7 +57,7 @@ Return:        // success: return dios speech signal process pointer
                   failure: return NULL
 **********************************************************************************/
 void* dios_ssp_init_api(objSSP_Param *SSP_PARAM);
-	
+
 /**********************************************************************************
 Function:      // dios_ssp_reset_api
 Description:   // reset dios speech signal process module
@@ -66,7 +70,7 @@ int dios_ssp_reset_api(void* ptr, objSSP_Param *SSP_PARAM);
 
 /**********************************************************************************
 Function:      // dios_ssp_process_api
-Description:   // run dios speech signal process module by frames 
+Description:   // run dios speech signal process module by frames
 Input:         // ptr: dios speech signal process pointer
                   mic_buf: microphone array data buffer
                   ref_buf: reference data buffer
@@ -78,7 +82,7 @@ Input:         // ptr: dios speech signal process pointer
 Output:        // out_buf: processed data
 Return:        // success: return OK_AUDIO_PROCESS, failure: return others
 **********************************************************************************/
-int dios_ssp_process_api(void* ptr, short* mic_buf, short* ref_buf, 
+int dios_ssp_process_api(void* ptr, short* mic_buf, short* ref_buf,
             short* out_buf, objSSP_Param *SSP_PARAM);
 
 /**********************************************************************************
@@ -110,6 +114,10 @@ Output:        // none
 Return:        // success: return OK_AUDIO_PROCESS, failure: return others
 **********************************************************************************/
 int dios_ssp_uninit_api(void* ptr, objSSP_Param *SSP_PARAM);
+
+#ifdef  __cplusplus
+}
+#endif
 
 #endif  /* _DIOS_SSP_API_H_ */
 

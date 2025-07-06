@@ -8,6 +8,7 @@
 // Usage: athena_signal_aec_sample
 // --input_file, -i: input mixed audio file. default: 'input.wav'
 // --ref_file, -r: input reference audio file. default: 'ref.wav'
+// --chunk_size,  -c: audio chunk size to read every time. default: 640
 // --output_file, -o: output pcm file for AEC processed audio. default: output.pcm
 //
 // $ ./athena_signal_aec_sample -i aec_input.wav -r aec_ref.wav -o aec_output.pcm
@@ -20,7 +21,7 @@
 #include "dios_ssp_return_defs.h"
 
 #define MAX_STR_LEN 128
-#define FRAME_SIZE (128)  // athena-signal use hard-coded frame size
+#define ATHENA_SIGNAL_FRAME_SIZE (128)  // athena-signal use hard-coded frame size
 
 
 void show_progressbar(int progress, int total, int barWidth)
@@ -42,7 +43,7 @@ void show_progressbar(int progress, int total, int barWidth)
 }
 
 
-int athena_signal_aec_sample(char* input_file, char* ref_file, char* output_file)
+int athena_signal_aec_sample(char* input_file, char* ref_file, int chunk_size, char* output_file)
 {
     int ret;
 
@@ -64,6 +65,10 @@ int athena_signal_aec_sample(char* input_file, char* ref_file, char* output_file
         }
     }
 
+    if (chunk_size % ATHENA_SIGNAL_FRAME_SIZE != 0) {
+        printf("WARNING: chunk_size is not multiple of Athena-signal frame size %d, which will cause process issue!\n", ATHENA_SIGNAL_FRAME_SIZE);
+    }
+
     // init dios ssp api
     void* st;
     st = dios_ssp_init_api(SSP_PARAM);
@@ -83,43 +88,52 @@ int athena_signal_aec_sample(char* input_file, char* ref_file, char* output_file
     // re-direct file pointer back to head
     rewind(fp_input);
 
-    // calculate audio frame number based on frame size
-    long frame_num = sample_num / FRAME_SIZE;
-    int tail_num = sample_num % FRAME_SIZE;
-    printf("frame number is %ld\n", frame_num);
+    // calculate audio chunk number based on chunk size
+    long chunk_num = sample_num / chunk_size;
+    int tail_num = sample_num % chunk_size;
+    printf("chunk number is %ld\n", chunk_num);
 
     // prepare data buffers
-    short *ptr_input_data = (short*)calloc(FRAME_SIZE, sizeof(short));
-    short *ptr_ref_data = (short*)calloc(FRAME_SIZE, sizeof(short));
-    short *ptr_output_data = (short*)calloc(FRAME_SIZE,sizeof(short));
+    short* ptr_input_data = (short*)calloc(chunk_size, sizeof(short));
+    short* ptr_ref_data = (short*)calloc(chunk_size, sizeof(short));
+    short* ptr_output_data = (short*)calloc(ATHENA_SIGNAL_FRAME_SIZE, sizeof(short));
 
     // signal processing here
-    for(long i=0; i < frame_num; i++) {
+    for(long i=0; i < chunk_num; i++) {
         // read mixed audio data from input file
-        ret = fread(ptr_input_data, sizeof(short), FRAME_SIZE, fp_input);
+        ret = fread(ptr_input_data, sizeof(short), chunk_size, fp_input);
         // read reference audio data from reference input file
-        ret = fread(ptr_ref_data, sizeof(short), FRAME_SIZE, fp_ref);
+        ret = fread(ptr_ref_data, sizeof(short), chunk_size, fp_ref);
 
-        // dios ssp processing
-        ret = dios_ssp_process_api(st, ptr_input_data, ptr_ref_data, ptr_output_data, SSP_PARAM);
-        if (ret != OK_AUDIO_PROCESS) {
-            printf("dios_ssp_process_api return error %d on frame %ld, exit process!\n", ret, i);
-            dios_ssp_uninit_api(st, SSP_PARAM);
-            fclose(fp_input);
-            fclose(fp_ref);
-            fclose(fp_output);
-            free(ptr_input_data);
-            free(ptr_ref_data);
-            free(ptr_output_data);
-            free(SSP_PARAM);
-            return -1;
+        short* ptr_tmp_input = ptr_input_data;
+        short* ptr_tmp_ref = ptr_ref_data;
+        int loop_num = chunk_size / ATHENA_SIGNAL_FRAME_SIZE;
+
+        for(int j=0; j < loop_num; j++) {
+            // dios ssp processing
+            ret = dios_ssp_process_api(st, ptr_tmp_input, ptr_tmp_ref, ptr_output_data, SSP_PARAM);
+            if (ret != OK_AUDIO_PROCESS) {
+                printf("dios_ssp_process_api return error %d on chunk %ld frame %d, exit process!\n", ret, i, j);
+                dios_ssp_uninit_api(st, SSP_PARAM);
+                fclose(fp_input);
+                fclose(fp_ref);
+                fclose(fp_output);
+                free(ptr_input_data);
+                free(ptr_ref_data);
+                free(ptr_output_data);
+                free(SSP_PARAM);
+                return -1;
+            }
+
+            // save enhanced audio to output file
+            fwrite(ptr_output_data, sizeof(short), ATHENA_SIGNAL_FRAME_SIZE, fp_output);
+            // move to next frame
+            ptr_tmp_input += ATHENA_SIGNAL_FRAME_SIZE;
+            ptr_tmp_ref += ATHENA_SIGNAL_FRAME_SIZE;
         }
 
-        // save enhanced audio to output file
-        fwrite(ptr_output_data, sizeof(short), FRAME_SIZE, fp_output);
-
         // show process bar
-        int percentage = 100*i/frame_num;
+        int percentage = 100*i/chunk_num;
         show_progressbar(percentage, 100, 100);
     }
     // just save some data as tail, to align output length with input
@@ -145,6 +159,7 @@ void display_usage()
     printf("Usage: athena_signal_aec_sample\n" \
            "--input_file, -i: input mixed audio file. default: 'input.wav'\n" \
            "--ref_file, -r: input reference audio file. default: 'ref.wav'\n" \
+           "--chunk_size,  -c: audio chunk size to read every time. default: 640\n" \
            "--output_file, -o: output pcm file for AEC processed audio. default: output.pcm\n" \
            "\n");
     return;
@@ -155,6 +170,7 @@ int main(int argc, char** argv)
 {
     char input_file[MAX_STR_LEN] = "input.wav";
     char ref_file[MAX_STR_LEN] = "ref.wav";
+    int chunk_size = 640;
     char output_file[MAX_STR_LEN] = "output.pcm";
 
     int c;
@@ -162,18 +178,22 @@ int main(int argc, char** argv)
         static struct option long_options[] = {
             {"input_file", required_argument, NULL, 'i'},
             {"ref_file", required_argument, NULL, 'r'},
+            {"chunk_size", required_argument, NULL, 'c'},
             {"output_file", required_argument, NULL, 'o'},
             {"help", no_argument, NULL, 'h'},
             {NULL, 0, NULL, 0}};
 
         /* getopt_long stores the option index here. */
         int option_index = 0;
-        c = getopt_long(argc, argv, "hi:o:r:", long_options, &option_index);
+        c = getopt_long(argc, argv, "c:hi:o:r:", long_options, &option_index);
 
         /* Detect the end of the options. */
         if (c == -1) break;
 
         switch (c) {
+            case 'c':
+                chunk_size = strtol(optarg, NULL, 10);
+                break;
             case 'i':
                 memset(input_file, 0, MAX_STR_LEN);
                 strcpy(input_file, optarg);
@@ -196,7 +216,7 @@ int main(int argc, char** argv)
     }
 
     printf("NOTE: Athena-signal lib only support 16k sample rate, 16-bit audio data!\n");
-    athena_signal_aec_sample(input_file, ref_file, output_file);
+    athena_signal_aec_sample(input_file, ref_file, chunk_size, output_file);
 
     printf("\nProcess finished.\n");
     return 0;

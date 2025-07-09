@@ -201,6 +201,7 @@ int dios_ssp_matrix_inv_delete(void *matrix_inv)
 	free(matrixinv->ai);
 	free(matrixinv->mat_temp);
 	free(matrixinv->mat_temp2);
+    free(matrixinv);
 
 	return 0;
 }

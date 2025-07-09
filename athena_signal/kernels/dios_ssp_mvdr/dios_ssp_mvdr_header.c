@@ -652,7 +652,9 @@ int dios_ssp_mvdr_cal_weights_adpmvdr(objMVDR *ptr_mvdr)
 void dios_ssp_mvdr_delete(objMVDR *ptr_mvdr)
 {
 	int ret = 0;
+	free(ptr_mvdr->dist);
 	dios_ssp_mvdr_win_delete(ptr_mvdr->mvdrwin);
+	free(ptr_mvdr->mvdrwin);
 	free(ptr_mvdr->fft_out);
 	free(ptr_mvdr->fft_in);
 	ret = dios_ssp_share_rfft_uninit(ptr_mvdr->mvdr_fft);

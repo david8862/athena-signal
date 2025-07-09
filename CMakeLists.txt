@@ -76,7 +76,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/install" CACHE PATH "Default install path" FORCE)
 endif()
 
-# 获取所有.h文件，包括子目录
+# get all the .h header files, including sub dir
 file(GLOB LIBATHENASIGNAL_HDRS   ${CMAKE_HOME_DIRECTORY}/athena_signal/kernels/*.h)
 file(GLOB LIBATHENASIGNAL_SHARE_HDRS   ${CMAKE_HOME_DIRECTORY}/athena_signal/kernels/dios_ssp_share/*.h)
 file(GLOB LIBATHENASIGNAL_AEC_HDRS   ${CMAKE_HOME_DIRECTORY}/athena_signal/kernels/dios_ssp_aec/*.h)
@@ -108,3 +108,9 @@ install(FILES ${LIBATHENASIGNAL_VAD_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR
 
 set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample athena_signal_hpf_sample athena_signal_aec_bf_agc_sample)
 install(TARGETS ${ATHENASIGNAL_SAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/samples)
+
+# install stress test data & scripts
+file(GLOB ATHENASIGNAL_TEST_DATA ${CMAKE_HOME_DIRECTORY}/testing/data/*)
+file(GLOB ATHENASIGNAL_TEST_SCRIPTS ${CMAKE_HOME_DIRECTORY}/testing/*.sh)
+install(FILES ${ATHENASIGNAL_TEST_DATA} DESTINATION ${CMAKE_INSTALL_PREFIX}/testing/data/)
+install(FILES ${ATHENASIGNAL_TEST_SCRIPTS} DESTINATION ${CMAKE_INSTALL_PREFIX}/testing/)

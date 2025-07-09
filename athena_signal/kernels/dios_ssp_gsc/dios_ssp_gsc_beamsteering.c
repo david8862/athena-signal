@@ -170,6 +170,7 @@ int dios_ssp_gsc_gscbeamsteer_process(objCGSCbeamsteer* gscbeamsteer, float **X,
 int dios_ssp_gsc_gscbeamsteer_delete(objCGSCbeamsteer* gscbeamsteer)
 {
 	dios_ssp_gscfirfilterdesign_delete(gscbeamsteer->generalfirdesign);
+	free(gscbeamsteer->generalfirdesign);
 	for (int i_mic = 0; i_mic < gscbeamsteer->m_nMic; i_mic++)
 	{
 		free(gscbeamsteer->m_pDlyLine[i_mic]);

@@ -328,6 +328,8 @@ int dios_ssp_doa_uninit_api(void *ptr)
 	int ret = 0;
 
 	dios_ssp_doa_win_delete(ptr_doa->doawin);
+    free(ptr_doa->doawin);
+
 	ret = dios_ssp_share_rfft_uninit(ptr_doa->doa_fft);
 	if (0 != ret)
 	{
@@ -360,6 +362,7 @@ int dios_ssp_doa_uninit_api(void *ptr)
     free(ptr_doa->m_rxx_re);
     free(ptr_doa->m_rxx_im);	
 	free(ptr_doa->m_irxx_out);	
+    free(ptr_doa);
 
     return 0;
 }

@@ -1,0 +1,496 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - [project name]</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script>
+      function getStyle(el, styleProp) {
+        var y;
+
+        if (el.currentStyle) {
+          y = el.currentStyle[styleProp];
+        } else if (window.getComputedStyle) {
+          y = document.defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
+        }
+
+        return y;
+      }
+
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+
+        if (el.style.display === "block") {
+          el.style.display = "none";
+          mark.textContent = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.textContent = "[-]";
+        }
+      }
+
+      function initExpandables() {
+        var elements = document.querySelectorAll(".expandable");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var el = elements[i];
+          var clickable = el.querySelector("span");
+          var marker = clickable.querySelector(".marker");
+          var content = el.querySelector(".content");
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.addEventListener("click", toggle);
+        }
+      }
+
+      function toggleDisplay(cb) {
+        var elements = document.querySelectorAll("." + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("id-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleSeverity(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+        var elements = document.querySelectorAll(".sev_" + cb.id);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("severity-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleTool(cb) {
+        cb.parentElement.classList.toggle("unchecked", !cb.checked);
+
+        var elements;
+        if (cb.id == "clang-tidy")
+            elements = document.querySelectorAll("[class^=clang-tidy-]");
+        else
+            elements = document.querySelectorAll(".issue:not([class^=clang-tidy-])");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          elements[i].classList.toggle("tool-filtered", !cb.checked);
+        }
+
+        updateFileRows();
+      }
+
+      function toggleAll() {
+        var elements = document.querySelectorAll(".idToggle");
+
+        // starting from 1 since 0 is the "toggle all" input
+        for (var i = 1, len = elements.length; i < len; i++) {
+          var changed = elements[i].checked != elements[0].checked;
+          if (changed) {
+            elements[i].checked = elements[0].checked;
+            toggleDisplay(elements[i]);
+          }
+        }
+      }
+
+      function filterFile(filter) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector("tr").querySelector("td").textContent.toLowerCase().includes(filter.toLowerCase());
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+      }
+
+      function filterText(text) {
+        filter = text.toLowerCase();
+        var elements = document.querySelectorAll(".issue");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = false;
+          var fields = elements[i].querySelectorAll("td");
+          for (var n = 0, num = fields.length; n < num; n++) {
+            if (fields[n].textContent.toLowerCase().includes(filter)) {
+              visible = true;
+              break;
+            }
+          }
+          elements[i].classList.toggle("text-filtered", !visible);
+        }
+
+        updateFileRows();
+      }
+
+      function updateFileRows(element) {
+        var elements = document.querySelectorAll(".fileEntry");
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var visible = elements[i].querySelector(".issue:not(.id-filtered):not(.severity-filtered):not(.tool-filtered):not(.text-filtered)");
+          elements[i].classList.toggle("file-filtered", !visible);
+        }
+      }
+
+      window.addEventListener("load", initExpandables);
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+    <div id="header" class="header">
+      <h1>Cppcheck report - [project name]</h1>
+      <div id="filters">
+
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="error"checked/>error</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="warning"checked/>warning</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="portability"disabled/>portability</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleSeverity(this)" id="performance"disabled/>performance</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="style"checked/>style</label>
+        <label class="checkBtn"><input type="checkbox" onclick="toggleSeverity(this)" id="information"checked/>information</label>
+        | 
+        <label class="checkBtn"><input type="checkbox" onclick="toggleTool(this)" id="cppcheck"checked/>cppcheck</label>
+        <label class="checkBtn disabled"><input type="checkbox" onclick="toggleTool(this)" id="clang-tidy"disabled/>clang-tidy</label>
+        | 
+        <label class="severityHeader">File: <input type="text" oninput="filterFile(this.value)"/></label>
+        <label class="severityHeader">Filter: <input type="text" oninput="filterText(this.value)"/></label>
+      </div>
+
+    </div>
+
+    <div id="menu_index">
+     <p><a href="index.html">Defect summary</a> </p>
+
+       <label><input type="checkbox" class="idToggle" onclick="toggleAll()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="variableScope" name="variableScope" checked></td><td>73</td><td>variableScope</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unreadVariable" name="unreadVariable" checked></td><td>72</td><td>unreadVariable</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="shadowVariable" name="shadowVariable" checked></td><td>29</td><td>shadowVariable</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constParameter" name="constParameter" checked></td><td>24</td><td>constParameter</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="unusedFunction" name="unusedFunction" checked></td><td>10</td><td>unusedFunction</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="constVariable" name="constVariable" checked></td><td>2</td><td>constVariable</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="knownConditionTrueFalse" name="knownConditionTrueFalse" checked></td><td>2</td><td>knownConditionTrueFalse</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="overlappingWriteFunction" name="overlappingWriteFunction" checked></td><td>2</td><td>overlappingWriteFunction</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="redundantAssignment" name="redundantAssignment" checked></td><td>2</td><td>redundantAssignment</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="arrayIndexThenCheck" name="arrayIndexThenCheck" checked></td><td>1</td><td>arrayIndexThenCheck</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="missingInclude" name="missingInclude" checked></td><td>1</td><td>missingInclude</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="noValidConfiguration" name="noValidConfiguration" checked></td><td>1</td><td>noValidConfiguration</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="toomanyconfigs" name="toomanyconfigs" checked></td><td>1</td><td>toomanyconfigs</td></tr>
+            <tr><td><input type="checkbox" class="idToggle" onclick="toggleDisplay(this)" id="uselessAssignmentPtrArg" name="uselessAssignmentPtrArg" checked></td><td>1</td><td>uselessAssignmentPtrArg</td></tr>
+           <tr><td></td><td>221</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+    </div>
+    <div id="content_index">
+
+       <table class="summaryTable">
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="35.html"></a></td></tr>
+         <tr class="missingInclude sev_information issue"><td></td><td>missingInclude</td><td></td><td>information</td><td>Cppcheck cannot find all the include files (use --check-config for details)</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="0.html">../athena_signal/dios_signal.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="0.html#line-34">34</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;fe_switch&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="0.html#line-34">34</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;mic_coord&apos; can be declared with const</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="0.html#line-34">34</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;dios_ssp_v1&apos; is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="1.html">../athena_signal/dios_signal_wrap.c</a></td></tr>
+         <tr class="toomanyconfigs sev_information issue"><td><a href="1.html#line-0">0</a></td><td>toomanyconfigs</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>information</td><td>Too many #ifdef configurations - cppcheck only checks 12 of 33 configurations. Use --force to check all configurations.</td></tr>
+         <tr class="noValidConfiguration sev_information issue"><td><a href="1.html#line-0">0</a></td><td>noValidConfiguration</td><td></td><td>information</td><td>This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="2.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_api.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="2.html#line-546">546</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret_process&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="3.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_doubletalk.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="3.html#line-103">103</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;res1_eng_tmp&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="3.html#line-103">103</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;res1_eng_tmp&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="4.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_erl_est.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="4.html#line-29">29</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;erl_dyn_bound_high&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="4.html#line-30">30</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;erl_dyn_bound_low&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="5.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="5.html#line-206">206</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;x2_kl&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="5.html#line-206">206</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;x2_kl&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="5.html#line-323">323</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="5.html#line-323">323</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="6.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-36">36</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Pey&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-36">36</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Pyy&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-37">37</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Eh&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-37">37</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Yh&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-38">38</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;See&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-39">39</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;tmp32&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-40">40</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;alpha&apos; can be reduced.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="6.html#line-122">122</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;ps&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="6.html#line-125">125</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;gamma&apos; can be reduced.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="6.html#line-168">168</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;echo&apos; can be declared with const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="7.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="7.html#line-202">202</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;j1&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="7.html#line-202">202</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;j2&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="7.html#line-301">301</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;i_mic&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="7.html#line-302">302</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;i_ref&apos; can be reduced.</td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="7.html#line-341">341</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/571.html">571</a></td><td>style</td><td>Condition &apos;srv!=NULL&apos; is always true</td></tr>
+         <tr class="uselessAssignmentPtrArg sev_warning issue"><td><a href="7.html#line-344">344</a></td><td>uselessAssignmentPtrArg</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>warning</td><td class="warning">Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="8.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="8.html#line-155">155</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;shifts&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="8.html#line-156">156</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;bit_count&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="8.html#line-156">156</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;bit_count&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="8.html#line-157">157</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;threshold&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="8.html#line-157">157</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;threshold&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="8.html#line-158">158</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;is_histogram_valid&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="8.html#line-158">158</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;is_histogram_valid&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="8.html#line-159">159</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;is_robust&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="8.html#line-159">159</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;is_robust&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="9.html">../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="9.html#line-34">34</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;absolute&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="9.html#line-34">34</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;absolute&apos; is assigned a value that is never used.</td></tr>
+         <tr class="overlappingWriteFunction sev_error issue"><td><a href="9.html#line-221">221</a></td><td>overlappingWriteFunction</td><td></td><td>error</td><td class="error">Overlapping read/write in memcpy() is undefined behavior</td></tr>
+         <tr class="overlappingWriteFunction sev_error issue"><td><a href="9.html#line-222">222</a></td><td>overlappingWriteFunction</td><td></td><td>error</td><td class="error">Overlapping read/write in memcpy() is undefined behavior</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="10.html">../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-148">148</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;sample_value0&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-148">148</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;sample_value0&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-149">149</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;sample_value1&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-149">149</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;sample_value1&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-150">150</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;sample_value2&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-150">150</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;sample_value2&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-151">151</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;sample_value3&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-151">151</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;sample_value3&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-196">196</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;temp&apos; is assigned a value that is never used.</td></tr>
+         <tr class="arrayIndexThenCheck sev_style issue"><td><a href="10.html#line-202">202</a></td><td>arrayIndexThenCheck</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Array index &apos;m&apos; is used before limits check.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-485">485</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;k&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-485">485</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;k&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-486">486</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;vadsum&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-487">487</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;env&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="10.html#line-487">487</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;env&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="10.html#line-489">489</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;sort_idx&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="11.html">../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-26">26</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;rxx_re&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-26">26</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;rxx_im&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-72">72</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;deta&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="11.html#line-73">73</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;theta&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-73">73</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;theta&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-75">75</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;omega&apos; is assigned a value that is never used.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="11.html#line-193">193</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;in&apos; can be declared with const</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="11.html#line-294">294</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;im_temp&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="12.html">../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="12.html#line-25">25</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;log_fft_size&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="12.html#line-26">26</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;temp&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="12.html#line-39">39</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;log_fft_size&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="13.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c</a></td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="13.html#line-249">249</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="13.html#line-275">275</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;ctrl_abm&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="13.html#line-275">275</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;ctrl_aic&apos; can be declared with const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="14.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="14.html#line-235">235</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;ctrl_abm&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="14.html#line-235">235</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;ctrl_aic&apos; can be declared with const</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-243">243</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;k&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-247">247</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-252">252</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-285">285</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;k&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-291">291</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;k&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-307">307</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-312">312</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-321">321</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-420">420</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-423">423</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-432">432</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-438">438</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-452">452</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="14.html#line-457">457</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="15.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_beamsteering.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="15.html#line-21">21</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;FIRTaps&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="15.html#line-150">150</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;delay_sample&apos; can be declared with const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="16.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c</a></td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="16.html#line-95">95</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="16.html#line-100">100</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="17.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c</a></td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-132">132</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-137">137</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-174">174</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-194">194</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-209">209</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="17.html#line-237">237</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="18.html">../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c</a></td></tr>
+         <tr class="constVariable sev_style issue"><td><a href="18.html#line-24">24</a></td><td>constVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;MTab&apos; can be declared with const</td></tr>
+         <tr class="constVariable sev_style issue"><td><a href="18.html#line-26">26</a></td><td>constVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Variable &apos;DTab&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="18.html#line-53">53</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;pPSDInput&apos; can be declared with const</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="18.html#line-60">60</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;i&apos; shadows outer variable</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="18.html#line-135">135</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;param&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="18.html#line-135">135</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;param&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="18.html#line-205">205</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;u&apos; can be reduced.</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="18.html#line-356">356</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;k&apos; shadows outer variable</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="18.html#line-423">423</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;k&apos; shadows outer variable</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="18.html#line-449">449</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;param&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="18.html#line-449">449</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;param&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="19.html">../athena_signal/kernels/dios_ssp_hpf/dios_ssp_hpf_api.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="19.html#line-49">49</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;center_tap&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="19.html#line-49">49</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;center_tap&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="20.html">../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c</a></td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="20.html#line-21">21</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;dios_ssp_mvdr_inv_init&apos; is never used.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="20.html#line-51">51</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;R&apos; can be declared with const</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="20.html#line-51">51</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;dios_ssp_mvdr_inv_process&apos; is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="20.html#line-57">57</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;d&apos; can be reduced.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="20.html#line-176">176</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;dios_ssp_mvdr_inv_delete&apos; is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="21.html">../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-25">25</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;f&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-25">25</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;f&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-25">25</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;temp&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-122">122</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;deta&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-123">123</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;theta&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-123">123</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;theta&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-125">125</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;omega&apos; is assigned a value that is never used.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="21.html#line-365">365</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;in&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-465">465</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Srk&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-465">465</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ik&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-465">465</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;adk&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-465">465</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;xn_amp&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-533">533</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;rnn_re&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-533">533</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;rnn_im&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="21.html#line-614">614</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;power&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-614">614</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;re_temp&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-614">614</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;im_temp&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-614">614</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;power&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-614">614</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;re_temp2&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="21.html#line-614">614</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;im_temp2&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="22.html">../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="22.html#line-25">25</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;log_fft_size&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="22.html#line-26">26</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;temp&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="22.html#line-39">39</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;log_fft_size&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="23.html">../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="23.html#line-366">366</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;x&apos; can be declared with const</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="23.html#line-375">375</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;x&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-486">486</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;alfa_noise&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-516">516</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;vk&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-516">516</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;j00&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-516">516</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;j11&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-516">516</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;tmpB&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-516">516</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;tmpC&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-517">517</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;evk&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-517">517</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;Lambda&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="23.html#line-517">517</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;pSAP&apos; can be reduced.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="23.html#line-562">562</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;in_data&apos; can be declared with const</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="24.html">../athena_signal/kernels/dios_ssp_share/dios_ssp_share_cinv.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="24.html#line-57">57</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;R&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="24.html#line-66">66</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;d&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="25.html">../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c</a></td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-49">49</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_gen&apos; is never used.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-71">71</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_abs&apos; is never used.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-107">107</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_sqrt&apos; is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="25.html#line-110">110</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;x&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="25.html#line-110">110</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;y&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="25.html#line-110">110</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;w&apos; can be reduced.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="25.html#line-110">110</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;r&apos; can be reduced.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-195">195</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_div&apos; is never used.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-219">219</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_div2&apos; is never used.</td></tr>
+         <tr class="unusedFunction sev_style issue"><td><a href="25.html#line-244">244</a></td><td>unusedFunction</td><td><a href="https://cwe.mitre.org/data/definitions/561.html">561</a></td><td>style</td><td>The function &apos;complex_avg_vec&apos; is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="26.html">../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="26.html#line-60">60</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;inbuffer&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="26.html#line-70">70</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;mq&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-70">70</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;mq&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-73">73</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;k&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-74">74</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;jr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-75">75</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ji&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-76">76</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;kr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-77">77</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ki&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-79">79</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;xr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-80">80</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;xi&apos; is assigned a value that is never used.</td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="26.html#line-137">137</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;inbuffer&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="26.html#line-147">147</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;mq&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-147">147</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;mq&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-150">150</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;k&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-151">151</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;jr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-152">152</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ji&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-153">153</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;kr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-154">154</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ki&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-156">156</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;xr&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="26.html#line-157">157</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;xi&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="27.html">../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="27.html#line-212">212</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;in_buf&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="27.html#line-219">219</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;r0&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="27.html#line-219">219</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;r0&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="28.html">../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c</a></td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-428">428</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;j1&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-429">429</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;j2&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="28.html#line-430">430</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;tmpi&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-430">430</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;tmpi&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-766">766</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;tmpf&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-767">767</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;j1&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="28.html#line-768">768</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;j2&apos; is assigned a value that is never used.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="29.html">../samples/athena_signal_aec_bf_agc_sample.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="29.html#line-50">50</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;mic_coord&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="29.html#line-52">52</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="29.html#line-129">129</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is reassigned a value before the old one has been used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="29.html#line-129">129</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="29.html#line-139">139</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="30.html">../samples/athena_signal_aec_sample.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="30.html#line-48">48</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="knownConditionTrueFalse sev_style issue"><td><a href="30.html#line-61">61</a></td><td>knownConditionTrueFalse</td><td><a href="https://cwe.mitre.org/data/definitions/570.html">570</a></td><td>style</td><td>Condition &apos;SSP_PARAM-&gt;ref_num==0&apos; is always false</td></tr>
+         <tr class="redundantAssignment sev_style issue"><td><a href="30.html#line-106">106</a></td><td>redundantAssignment</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is reassigned a value before the old one has been used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="30.html#line-106">106</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="30.html#line-176">176</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;c&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="31.html">../samples/athena_signal_agc_sample.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="31.html#line-47">47</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="31.html#line-96">96</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="31.html#line-160">160</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;c&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="32.html">../samples/athena_signal_bf_sample.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="32.html#line-49">49</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;mic_coord&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="32.html#line-51">51</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="32.html#line-117">117</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="32.html#line-125">125</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="33.html">../samples/athena_signal_doa_sample.c</a></td></tr>
+         <tr class="constParameter sev_style issue"><td><a href="33.html#line-46">46</a></td><td>constParameter</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Parameter &apos;mic_coord&apos; can be declared with const</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="33.html#line-48">48</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="33.html#line-48">48</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="33.html#line-111">111</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="shadowVariable sev_style issue"><td><a href="33.html#line-119">119</a></td><td>shadowVariable</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>Local variable &apos;j&apos; shadows outer variable</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="33.html#line-206">206</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;c&apos; can be reduced.</td></tr>
+      <tbody class="fileEntry">
+       <tr><td colspan="5"><a href="34.html">../samples/athena_signal_hpf_sample.c</a></td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="34.html#line-47">47</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;ret&apos; can be reduced.</td></tr>
+         <tr class="unreadVariable sev_style issue"><td><a href="34.html#line-96">96</a></td><td>unreadVariable</td><td><a href="https://cwe.mitre.org/data/definitions/563.html">563</a></td><td>style</td><td>Variable &apos;ret&apos; is assigned a value that is never used.</td></tr>
+         <tr class="variableScope sev_style issue"><td><a href="34.html#line-161">161</a></td><td>variableScope</td><td><a href="https://cwe.mitre.org/data/definitions/398.html">398</a></td><td>style</td><td>The scope of the variable &apos;c&apos; can be reduced.</td></tr>
+      </tbody>
+       </table>
+    </div>
+    <div id="footer" class="footer">
+      <p>
+        Created by Cppcheck 2.7 (<a href="https://cppcheck.sourceforge.io">Sourceforge</a>, <a href="irc://irc.freenode.net/cppcheck">IRC</a>)
+      </p>
+    </div>
+    </div>
+  </body>
+</html>

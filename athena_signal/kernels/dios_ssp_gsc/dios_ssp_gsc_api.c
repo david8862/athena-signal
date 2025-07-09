@@ -83,5 +83,6 @@ int dios_ssp_gsc_uninit_api(void* ptr)
 	objGSCProcess *ptr_gsc;
 	ptr_gsc= (objGSCProcess*)ptr;
 	dios_ssp_gsc_delete(ptr_gsc);
+	free(ptr_gsc);
 	return 0;
 }

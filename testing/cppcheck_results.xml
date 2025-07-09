@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.7"/>
+    <errors>
+        <error id="constParameter" severity="style" msg="Parameter &apos;fe_switch&apos; can be declared with const" verbose="Parameter &apos;fe_switch&apos; can be declared with const" cwe="398" file0="../athena_signal/dios_signal.c">
+            <location file="../athena_signal/dios_signal.c" line="34" column="45" info="Parameter &apos;fe_switch&apos; can be declared with const"/>
+            <symbol>fe_switch</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;mic_coord&apos; can be declared with const" verbose="Parameter &apos;mic_coord&apos; can be declared with const" cwe="398" file0="../athena_signal/dios_signal.c">
+            <location file="../athena_signal/dios_signal.c" line="34" column="73" info="Parameter &apos;mic_coord&apos; can be declared with const"/>
+            <symbol>mic_coord</symbol>
+        </error>
+        <error id="toomanyconfigs" severity="information" msg="Too many #ifdef configurations - cppcheck only checks 12 of 33 configurations. Use --force to check all configurations." verbose="The checking of the file will be interrupted because there are too many #ifdef configurations. Checking of all #ifdef configurations can be forced by --force command line option or from GUI preferences. However that may increase the checking time." cwe="398">
+            <location file="../athena_signal/dios_signal_wrap.c" line="0" column="0"/>
+        </error>
+        <error id="noValidConfiguration" severity="information" msg="This file is not analyzed. Cppcheck failed to extract a valid configuration. Use -v for more details." verbose="This file is not analyzed. Cppcheck failed to extract a valid configuration. The tested configurations have these preprocessor errors:\012&apos;&apos; : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012COUNT_ALLOCS : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012LLONG_MAX;__GNUC__;__LONG_LONG_MAX__;SWIG_NO_LLONG_MAX : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012PyWeakref_CheckProxy : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012PyWeakref_CheckProxy;SWIGPYTHON_BUILTIN : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012Py_USING_UNICODE;SWIGPYTHON_BUILTIN : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012STATIC_LINKED;_WIN32;__CYGWIN__;__WIN32__ : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIGPYTHON_BUILTIN : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_CASTRANK_MODE : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_COBJECT_TYPES : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_LINK_RUNTIME : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_LONG_LONG_AVAILABLE : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_NO_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_MSC_VER : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_NO_LLONG_MAX : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_NO_SCL_SECURE_NO_DEPRECATE;_MSC_VER;_SCL_SECURE_NO_DEPRECATE : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_CAST_MODE : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_INTERPRETER_NO_DEBUG;_DEBUG : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_NO_HYPOT_WORKAROUND;_WIN32;__GNUC__ : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_NO_THREADS : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_NO_THREADS;SWIG_PYTHON_THREADS : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_NO_USE_GIL;SWIG_PYTHON_USE_GIL;SWIG_PYTHON_THREADS : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_SILENT_MEMLEAK : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_PYTHON_THREADS : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012SWIG_TYPE_TABLE : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012_MSC_VER : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012_WIN32;__CYGWIN__;__WIN32__ : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__APPLE__;__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__GNUC__ : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__GNUC__;__STRICT_ANSI__ : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__HP_aCC : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__ICC : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__INTEL_COMPILER : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;\012__SUNPRO_CC : [../athena_signal/dios_signal_wrap.c:1047] #error &quot;This version of SWIG only supports Python &gt;= 2.7&quot;" file0="../athena_signal/dios_signal_wrap.c">
+            <location file="../athena_signal/dios_signal_wrap.c" line="0" column="0"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret_process&apos; is assigned a value that is never used." verbose="Variable &apos;ret_process&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_api.c" line="546" column="15"/>
+            <symbol>ret_process</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;res1_eng_tmp&apos; can be reduced." verbose="The scope of the variable &apos;res1_eng_tmp&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_doubletalk.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_doubletalk.c" line="103" column="8"/>
+            <symbol>res1_eng_tmp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;res1_eng_tmp&apos; is assigned a value that is never used." verbose="Variable &apos;res1_eng_tmp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_doubletalk.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_doubletalk.c" line="103" column="21"/>
+            <symbol>res1_eng_tmp</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;erl_dyn_bound_high&apos; can be reduced." verbose="The scope of the variable &apos;erl_dyn_bound_high&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_erl_est.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_erl_est.c" line="29" column="8"/>
+            <symbol>erl_dyn_bound_high</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;erl_dyn_bound_low&apos; can be reduced." verbose="The scope of the variable &apos;erl_dyn_bound_low&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_erl_est.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_erl_est.c" line="30" column="8"/>
+            <symbol>erl_dyn_bound_low</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;x2_kl&apos; can be reduced." verbose="The scope of the variable &apos;x2_kl&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c" line="206" column="8"/>
+            <symbol>x2_kl</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c" line="323" column="6"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;x2_kl&apos; is assigned a value that is never used." verbose="Variable &apos;x2_kl&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c" line="206" column="14"/>
+            <symbol>x2_kl</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_firfilter.c" line="323" column="10"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Pey&apos; can be reduced." verbose="The scope of the variable &apos;Pey&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="36" column="8"/>
+            <symbol>Pey</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Pyy&apos; can be reduced." verbose="The scope of the variable &apos;Pyy&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="36" column="19"/>
+            <symbol>Pyy</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Eh&apos; can be reduced." verbose="The scope of the variable &apos;Eh&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="37" column="8"/>
+            <symbol>Eh</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Yh&apos; can be reduced." verbose="The scope of the variable &apos;Yh&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="37" column="12"/>
+            <symbol>Yh</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;See&apos; can be reduced." verbose="The scope of the variable &apos;See&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="38" column="19"/>
+            <symbol>See</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;tmp32&apos; can be reduced." verbose="The scope of the variable &apos;tmp32&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="39" column="8"/>
+            <symbol>tmp32</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;alpha&apos; can be reduced." verbose="The scope of the variable &apos;alpha&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="40" column="8"/>
+            <symbol>alpha</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;gamma&apos; can be reduced." verbose="The scope of the variable &apos;gamma&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="125" column="8"/>
+            <symbol>gamma</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;ps&apos; can be declared with const" verbose="Parameter &apos;ps&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="122" column="54" info="Parameter &apos;ps&apos; can be declared with const"/>
+            <symbol>ps</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;echo&apos; can be declared with const" verbose="Parameter &apos;echo&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_res.c" line="168" column="87" info="Parameter &apos;echo&apos; can be declared with const"/>
+            <symbol>echo</symbol>
+        </error>
+        <error id="uselessAssignmentPtrArg" severity="warning" msg="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" verbose="Assignment of function parameter has no effect outside the function. Did you forget dereferencing it?" cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="344" column="9"/>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;srv!=NULL&apos; is always true" verbose="Condition &apos;srv!=NULL&apos; is always true" cwe="571" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="341" column="13" info="Condition &apos;srv!=NULL&apos; is always true"/>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j1&apos; can be reduced." verbose="The scope of the variable &apos;j1&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="202" column="7"/>
+            <symbol>j1</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j2&apos; can be reduced." verbose="The scope of the variable &apos;j2&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="202" column="11"/>
+            <symbol>j2</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;i_mic&apos; can be reduced." verbose="The scope of the variable &apos;i_mic&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="301" column="6"/>
+            <symbol>i_mic</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;i_ref&apos; can be reduced." verbose="The scope of the variable &apos;i_ref&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde.c" line="302" column="6"/>
+            <symbol>i_ref</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;bit_count&apos; can be reduced." verbose="The scope of the variable &apos;bit_count&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="156" column="9"/>
+            <symbol>bit_count</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;threshold&apos; can be reduced." verbose="The scope of the variable &apos;threshold&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="157" column="9"/>
+            <symbol>threshold</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;is_histogram_valid&apos; can be reduced." verbose="The scope of the variable &apos;is_histogram_valid&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="158" column="9"/>
+            <symbol>is_histogram_valid</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;is_robust&apos; can be reduced." verbose="The scope of the variable &apos;is_robust&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="159" column="9"/>
+            <symbol>is_robust</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;shifts&apos; is assigned a value that is never used." verbose="Variable &apos;shifts&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="155" column="16"/>
+            <symbol>shifts</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;bit_count&apos; is assigned a value that is never used." verbose="Variable &apos;bit_count&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="156" column="19"/>
+            <symbol>bit_count</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;threshold&apos; is assigned a value that is never used." verbose="Variable &apos;threshold&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="157" column="19"/>
+            <symbol>threshold</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;is_histogram_valid&apos; is assigned a value that is never used." verbose="Variable &apos;is_histogram_valid&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="158" column="28"/>
+            <symbol>is_histogram_valid</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;is_robust&apos; is assigned a value that is never used." verbose="Variable &apos;is_robust&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator.c" line="159" column="19"/>
+            <symbol>is_robust</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;absolute&apos; can be reduced." verbose="The scope of the variable &apos;absolute&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c" line="34" column="13"/>
+            <symbol>absolute</symbol>
+        </error>
+        <error id="overlappingWriteFunction" severity="error" msg="Overlapping read/write in memcpy() is undefined behavior" verbose="Overlapping read/write in memcpy() is undefined behavior" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c" line="221" column="5"/>
+        </error>
+        <error id="overlappingWriteFunction" severity="error" msg="Overlapping read/write in memcpy() is undefined behavior" verbose="Overlapping read/write in memcpy() is undefined behavior" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c" line="222" column="5"/>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;absolute&apos; is assigned a value that is never used." verbose="Variable &apos;absolute&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c">
+            <location file="../athena_signal/kernels/dios_ssp_aec/dios_ssp_aec_tde/dios_ssp_aec_tde_delay_estimator_wrapper.c" line="34" column="22"/>
+            <symbol>absolute</symbol>
+        </error>
+        <error id="arrayIndexThenCheck" severity="style" msg="Array index &apos;m&apos; is used before limits check." verbose="Defensive programming: The variable &apos;m&apos; is used as an array index before it is checked that is within limits. This can mean that the array might be accessed out of bounds. Reorder conditions such as &apos;(a[i] &amp;&amp; i &lt; 10)&apos; to &apos;(i &lt; 10 &amp;&amp; a[i])&apos;. That way the array will not be accessed if the index is out of limits." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="202" column="11"/>
+            <symbol>m</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;sample_value0&apos; can be reduced." verbose="The scope of the variable &apos;sample_value0&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="148" column="8"/>
+            <symbol>sample_value0</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;sample_value1&apos; can be reduced." verbose="The scope of the variable &apos;sample_value1&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="149" column="8"/>
+            <symbol>sample_value1</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;sample_value2&apos; can be reduced." verbose="The scope of the variable &apos;sample_value2&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="150" column="8"/>
+            <symbol>sample_value2</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;sample_value3&apos; can be reduced." verbose="The scope of the variable &apos;sample_value3&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="151" column="8"/>
+            <symbol>sample_value3</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;k&apos; can be reduced." verbose="The scope of the variable &apos;k&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="485" column="9"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;vadsum&apos; can be reduced." verbose="The scope of the variable &apos;vadsum&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="486" column="8"/>
+            <symbol>vadsum</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;env&apos; can be reduced." verbose="The scope of the variable &apos;env&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="487" column="8"/>
+            <symbol>env</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;sort_idx&apos; can be reduced." verbose="The scope of the variable &apos;sort_idx&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="489" column="6"/>
+            <symbol>sort_idx</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;sample_value0&apos; is assigned a value that is never used." verbose="Variable &apos;sample_value0&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="148" column="22"/>
+            <symbol>sample_value0</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;sample_value1&apos; is assigned a value that is never used." verbose="Variable &apos;sample_value1&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="149" column="22"/>
+            <symbol>sample_value1</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;sample_value2&apos; is assigned a value that is never used." verbose="Variable &apos;sample_value2&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="150" column="22"/>
+            <symbol>sample_value2</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;sample_value3&apos; is assigned a value that is never used." verbose="Variable &apos;sample_value3&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="151" column="22"/>
+            <symbol>sample_value3</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="196" column="13"/>
+            <symbol>temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="485" column="11"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;env&apos; is assigned a value that is never used." verbose="Variable &apos;env&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_agc/dios_ssp_agc_api.c" line="487" column="12"/>
+            <symbol>env</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;theta&apos; can be reduced." verbose="The scope of the variable &apos;theta&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="73" column="8"/>
+            <symbol>theta</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;in&apos; can be declared with const" verbose="Parameter &apos;in&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="193" column="50" info="Parameter &apos;in&apos; can be declared with const"/>
+            <symbol>in</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;rxx_re&apos; is assigned a value that is never used." verbose="Variable &apos;rxx_re&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="26" column="15"/>
+            <symbol>rxx_re</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;rxx_im&apos; is assigned a value that is never used." verbose="Variable &apos;rxx_im&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="26" column="27"/>
+            <symbol>rxx_im</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;deta&apos; is assigned a value that is never used." verbose="Variable &apos;deta&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="72" column="13"/>
+            <symbol>deta</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;theta&apos; is assigned a value that is never used." verbose="Variable &apos;theta&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="73" column="14"/>
+            <symbol>theta</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;omega&apos; is assigned a value that is never used." verbose="Variable &apos;omega&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="75" column="14"/>
+            <symbol>omega</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;im_temp&apos; is assigned a value that is never used." verbose="Variable &apos;im_temp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_api.c" line="294" column="13"/>
+            <symbol>im_temp</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;temp&apos; can be reduced." verbose="The scope of the variable &apos;temp&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c" line="26" column="8"/>
+            <symbol>temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;log_fft_size&apos; is assigned a value that is never used." verbose="Variable &apos;log_fft_size&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c" line="25" column="19"/>
+            <symbol>log_fft_size</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;log_fft_size&apos; is assigned a value that is never used." verbose="Variable &apos;log_fft_size&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_doa/dios_ssp_doa_win.c" line="39" column="16"/>
+            <symbol>log_fft_size</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c" line="249" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c" line="244" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;ctrl_abm&apos; can be declared with const" verbose="Parameter &apos;ctrl_abm&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c" line="275" column="72" info="Parameter &apos;ctrl_abm&apos; can be declared with const"/>
+            <symbol>ctrl_abm</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;ctrl_aic&apos; can be declared with const" verbose="Parameter &apos;ctrl_aic&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_abm.c" line="275" column="89" info="Parameter &apos;ctrl_aic&apos; can be declared with const"/>
+            <symbol>ctrl_aic</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;k&apos; shadows outer variable" verbose="Local variable &apos;k&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="243" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="12" info="Shadowed declaration"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="247" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="252" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;k&apos; shadows outer variable" verbose="Local variable &apos;k&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="285" column="10" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="12" info="Shadowed declaration"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;k&apos; shadows outer variable" verbose="Local variable &apos;k&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="291" column="10" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="12" info="Shadowed declaration"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="307" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="312" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="321" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="420" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="423" column="13" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="9" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="432" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="9" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="438" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="9" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="452" column="13" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="9" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="457" column="13" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="237" column="9" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;ctrl_abm&apos; can be declared with const" verbose="Parameter &apos;ctrl_abm&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="235" column="72" info="Parameter &apos;ctrl_abm&apos; can be declared with const"/>
+            <symbol>ctrl_abm</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;ctrl_aic&apos; can be declared with const" verbose="Parameter &apos;ctrl_aic&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_aic.c" line="235" column="89" info="Parameter &apos;ctrl_aic&apos; can be declared with const"/>
+            <symbol>ctrl_aic</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;delay_sample&apos; can be declared with const" verbose="Parameter &apos;delay_sample&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_beamsteering.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_beamsteering.c" line="150" column="73" info="Parameter &apos;delay_sample&apos; can be declared with const"/>
+            <symbol>delay_sample</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;FIRTaps&apos; can be declared with const" verbose="Parameter &apos;FIRTaps&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_beamsteering.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_beamsteering.c" line="21" column="74" info="Parameter &apos;FIRTaps&apos; can be declared with const"/>
+            <symbol>FIRTaps</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c" line="95" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c" line="82" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c" line="100" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_filtsumbeamformer.c" line="82" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="132" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="137" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="174" column="13" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="194" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="209" column="12" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="237" column="13" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_firfilterdesign.c" line="107" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;param&apos; can be reduced." verbose="The scope of the variable &apos;param&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="135" column="8"/>
+            <symbol>param</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;u&apos; can be reduced." verbose="The scope of the variable &apos;u&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="205" column="6"/>
+            <symbol>u</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;param&apos; can be reduced." verbose="The scope of the variable &apos;param&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="449" column="8"/>
+            <symbol>param</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;i&apos; shadows outer variable" verbose="Local variable &apos;i&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="60" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="55" column="6" info="Shadowed declaration"/>
+            <symbol>i</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;k&apos; shadows outer variable" verbose="Local variable &apos;k&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="356" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="283" column="6" info="Shadowed declaration"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;k&apos; shadows outer variable" verbose="Local variable &apos;k&apos; shadows outer variable" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="423" column="11" info="Shadow variable"/>
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="380" column="6" info="Shadowed declaration"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="constVariable" severity="style" msg="Variable &apos;MTab&apos; can be declared with const" verbose="Variable &apos;MTab&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="24" column="8" info="Variable &apos;MTab&apos; can be declared with const"/>
+            <symbol>MTab</symbol>
+        </error>
+        <error id="constVariable" severity="style" msg="Variable &apos;DTab&apos; can be declared with const" verbose="Variable &apos;DTab&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="26" column="6" info="Variable &apos;DTab&apos; can be declared with const"/>
+            <symbol>DTab</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;pPSDInput&apos; can be declared with const" verbose="Parameter &apos;pPSDInput&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="53" column="87" info="Parameter &apos;pPSDInput&apos; can be declared with const"/>
+            <symbol>pPSDInput</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;param&apos; is assigned a value that is never used." verbose="Variable &apos;param&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="135" column="14"/>
+            <symbol>param</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;param&apos; is assigned a value that is never used." verbose="Variable &apos;param&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c">
+            <location file="../athena_signal/kernels/dios_ssp_gsc/dios_ssp_gsc_rmNPsdOsMs.c" line="449" column="14"/>
+            <symbol>param</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;center_tap&apos; can be reduced." verbose="The scope of the variable &apos;center_tap&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_hpf/dios_ssp_hpf_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_hpf/dios_ssp_hpf_api.c" line="49" column="11"/>
+            <symbol>center_tap</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;center_tap&apos; is assigned a value that is never used." verbose="Variable &apos;center_tap&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_hpf/dios_ssp_hpf_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_hpf/dios_ssp_hpf_api.c" line="49" column="22"/>
+            <symbol>center_tap</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;d&apos; can be reduced." verbose="The scope of the variable &apos;d&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c" line="57" column="20"/>
+            <symbol>d</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;R&apos; can be declared with const" verbose="Parameter &apos;R&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c" line="51" column="60" info="Parameter &apos;R&apos; can be declared with const"/>
+            <symbol>R</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;f&apos; can be reduced." verbose="The scope of the variable &apos;f&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="25" column="8"/>
+            <symbol>f</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;theta&apos; can be reduced." verbose="The scope of the variable &apos;theta&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="123" column="8"/>
+            <symbol>theta</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Srk&apos; can be reduced." verbose="The scope of the variable &apos;Srk&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="465" column="9"/>
+            <symbol>Srk</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ik&apos; can be reduced." verbose="The scope of the variable &apos;ik&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="465" column="18"/>
+            <symbol>ik</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;adk&apos; can be reduced." verbose="The scope of the variable &apos;adk&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="465" column="26"/>
+            <symbol>adk</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;xn_amp&apos; can be reduced." verbose="The scope of the variable &apos;xn_amp&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="465" column="35"/>
+            <symbol>xn_amp</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;power&apos; can be reduced." verbose="The scope of the variable &apos;power&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="34"/>
+            <symbol>power</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;in&apos; can be declared with const" verbose="Parameter &apos;in&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="365" column="53" info="Parameter &apos;in&apos; can be declared with const"/>
+            <symbol>in</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;f&apos; is assigned a value that is never used." verbose="Variable &apos;f&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="25" column="10"/>
+            <symbol>f</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;temp&apos; is assigned a value that is never used." verbose="Variable &apos;temp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="25" column="20"/>
+            <symbol>temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;deta&apos; is assigned a value that is never used." verbose="Variable &apos;deta&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="122" column="13"/>
+            <symbol>deta</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;theta&apos; is assigned a value that is never used." verbose="Variable &apos;theta&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="123" column="14"/>
+            <symbol>theta</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;omega&apos; is assigned a value that is never used." verbose="Variable &apos;omega&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="125" column="14"/>
+            <symbol>omega</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;rnn_re&apos; is assigned a value that is never used." verbose="Variable &apos;rnn_re&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="533" column="15"/>
+            <symbol>rnn_re</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;rnn_im&apos; is assigned a value that is never used." verbose="Variable &apos;rnn_im&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="533" column="27"/>
+            <symbol>rnn_im</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;re_temp&apos; is assigned a value that is never used." verbose="Variable &apos;re_temp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="16"/>
+            <symbol>re_temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;im_temp&apos; is assigned a value that is never used." verbose="Variable &apos;im_temp&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="29"/>
+            <symbol>im_temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;power&apos; is assigned a value that is never used." verbose="Variable &apos;power&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="40"/>
+            <symbol>power</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;re_temp2&apos; is assigned a value that is never used." verbose="Variable &apos;re_temp2&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="54"/>
+            <symbol>re_temp2</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;im_temp2&apos; is assigned a value that is never used." verbose="Variable &apos;im_temp2&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_header.c" line="614" column="68"/>
+            <symbol>im_temp2</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;temp&apos; can be reduced." verbose="The scope of the variable &apos;temp&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c" line="26" column="8"/>
+            <symbol>temp</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;log_fft_size&apos; is assigned a value that is never used." verbose="Variable &apos;log_fft_size&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c" line="25" column="19"/>
+            <symbol>log_fft_size</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;log_fft_size&apos; is assigned a value that is never used." verbose="Variable &apos;log_fft_size&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_win.c" line="39" column="16"/>
+            <symbol>log_fft_size</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;alfa_noise&apos; can be reduced." verbose="The scope of the variable &apos;alfa_noise&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="486" column="8"/>
+            <symbol>alfa_noise</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;vk&apos; can be reduced." verbose="The scope of the variable &apos;vk&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="516" column="8"/>
+            <symbol>vk</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j00&apos; can be reduced." verbose="The scope of the variable &apos;j00&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="516" column="12"/>
+            <symbol>j00</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;j11&apos; can be reduced." verbose="The scope of the variable &apos;j11&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="516" column="17"/>
+            <symbol>j11</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;tmpB&apos; can be reduced." verbose="The scope of the variable &apos;tmpB&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="516" column="28"/>
+            <symbol>tmpB</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;tmpC&apos; can be reduced." verbose="The scope of the variable &apos;tmpC&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="516" column="34"/>
+            <symbol>tmpC</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;evk&apos; can be reduced." verbose="The scope of the variable &apos;evk&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="517" column="8"/>
+            <symbol>evk</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;Lambda&apos; can be reduced." verbose="The scope of the variable &apos;Lambda&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="517" column="13"/>
+            <symbol>Lambda</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;pSAP&apos; can be reduced." verbose="The scope of the variable &apos;pSAP&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="517" column="21"/>
+            <symbol>pSAP</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;x&apos; can be declared with const" verbose="Parameter &apos;x&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="366" column="41" info="Parameter &apos;x&apos; can be declared with const"/>
+            <symbol>x</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;x&apos; can be declared with const" verbose="Parameter &apos;x&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="375" column="41" info="Parameter &apos;x&apos; can be declared with const"/>
+            <symbol>x</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;in_data&apos; can be declared with const" verbose="Parameter &apos;in_data&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c">
+            <location file="../athena_signal/kernels/dios_ssp_ns/dios_ssp_ns_api.c" line="562" column="41" info="Parameter &apos;in_data&apos; can be declared with const"/>
+            <symbol>in_data</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;d&apos; can be reduced." verbose="The scope of the variable &apos;d&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_cinv.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_cinv.c" line="66" column="20"/>
+            <symbol>d</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;R&apos; can be declared with const" verbose="Parameter &apos;R&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_cinv.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_cinv.c" line="57" column="58" info="Parameter &apos;R&apos; can be declared with const"/>
+            <symbol>R</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;x&apos; can be reduced." verbose="The scope of the variable &apos;x&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="110" column="8"/>
+            <symbol>x</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;y&apos; can be reduced." verbose="The scope of the variable &apos;y&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="110" column="11"/>
+            <symbol>y</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;w&apos; can be reduced." verbose="The scope of the variable &apos;w&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="110" column="14"/>
+            <symbol>w</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;r&apos; can be reduced." verbose="The scope of the variable &apos;r&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="110" column="17"/>
+            <symbol>r</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;mq&apos; can be reduced." verbose="The scope of the variable &apos;mq&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="70" column="9"/>
+            <symbol>mq</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;mq&apos; can be reduced." verbose="The scope of the variable &apos;mq&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="147" column="9"/>
+            <symbol>mq</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;inbuffer&apos; can be declared with const" verbose="Parameter &apos;inbuffer&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="60" column="59" info="Parameter &apos;inbuffer&apos; can be declared with const"/>
+            <symbol>inbuffer</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;inbuffer&apos; can be declared with const" verbose="Parameter &apos;inbuffer&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="137" column="60" info="Parameter &apos;inbuffer&apos; can be declared with const"/>
+            <symbol>inbuffer</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;mq&apos; is assigned a value that is never used." verbose="Variable &apos;mq&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="70" column="12"/>
+            <symbol>mq</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="73" column="11"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;jr&apos; is assigned a value that is never used." verbose="Variable &apos;jr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="74" column="12"/>
+            <symbol>jr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ji&apos; is assigned a value that is never used." verbose="Variable &apos;ji&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="75" column="12"/>
+            <symbol>ji</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;kr&apos; is assigned a value that is never used." verbose="Variable &apos;kr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="76" column="12"/>
+            <symbol>kr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ki&apos; is assigned a value that is never used." verbose="Variable &apos;ki&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="77" column="12"/>
+            <symbol>ki</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;xr&apos; is assigned a value that is never used." verbose="Variable &apos;xr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="79" column="14"/>
+            <symbol>xr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;xi&apos; is assigned a value that is never used." verbose="Variable &apos;xi&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="80" column="14"/>
+            <symbol>xi</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;mq&apos; is assigned a value that is never used." verbose="Variable &apos;mq&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="147" column="12"/>
+            <symbol>mq</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;k&apos; is assigned a value that is never used." verbose="Variable &apos;k&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="150" column="11"/>
+            <symbol>k</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;jr&apos; is assigned a value that is never used." verbose="Variable &apos;jr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="151" column="12"/>
+            <symbol>jr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ji&apos; is assigned a value that is never used." verbose="Variable &apos;ji&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="152" column="12"/>
+            <symbol>ji</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;kr&apos; is assigned a value that is never used." verbose="Variable &apos;kr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="153" column="12"/>
+            <symbol>kr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ki&apos; is assigned a value that is never used." verbose="Variable &apos;ki&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="154" column="12"/>
+            <symbol>ki</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;xr&apos; is assigned a value that is never used." verbose="Variable &apos;xr&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="156" column="14"/>
+            <symbol>xr</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;xi&apos; is assigned a value that is never used." verbose="Variable &apos;xi&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_rfft.c" line="157" column="14"/>
+            <symbol>xi</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;r0&apos; can be reduced." verbose="The scope of the variable &apos;r0&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c" line="219" column="11"/>
+            <symbol>r0</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;in_buf&apos; can be declared with const" verbose="Parameter &apos;in_buf&apos; can be declared with const" cwe="398" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c" line="212" column="60" info="Parameter &apos;in_buf&apos; can be declared with const"/>
+            <symbol>in_buf</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;r0&apos; is assigned a value that is never used." verbose="Variable &apos;r0&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_subband.c" line="219" column="14"/>
+            <symbol>r0</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;tmpi&apos; can be reduced." verbose="The scope of the variable &apos;tmpi&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="430" column="9"/>
+            <symbol>tmpi</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j1&apos; is assigned a value that is never used." verbose="Variable &apos;j1&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="428" column="12"/>
+            <symbol>j1</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j2&apos; is assigned a value that is never used." verbose="Variable &apos;j2&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="429" column="12"/>
+            <symbol>j2</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;tmpi&apos; is assigned a value that is never used." verbose="Variable &apos;tmpi&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="430" column="14"/>
+            <symbol>tmpi</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;tmpf&apos; is assigned a value that is never used." verbose="Variable &apos;tmpf&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="766" column="14"/>
+            <symbol>tmpf</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j1&apos; is assigned a value that is never used." verbose="Variable &apos;j1&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="767" column="12"/>
+            <symbol>j1</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;j2&apos; is assigned a value that is never used." verbose="Variable &apos;j2&apos; is assigned a value that is never used." cwe="563" file0="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c">
+            <location file="../athena_signal/kernels/dios_ssp_vad/dios_ssp_vad_energy.c" line="768" column="12"/>
+            <symbol>j2</symbol>
+        </error>
+        <error id="redundantAssignment" severity="style" msg="Variable &apos;ret&apos; is reassigned a value before the old one has been used." verbose="Variable &apos;ret&apos; is reassigned a value before the old one has been used." cwe="563" file0="../samples/athena_signal_aec_bf_agc_sample.c">
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="129" column="13" info="ret is overwritten"/>
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="127" column="13" info="ret is assigned"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_aec_bf_agc_sample.c">
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="52" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../samples/athena_signal_aec_bf_agc_sample.c">
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="139" column="21" info="Shadow variable"/>
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="135" column="17" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;mic_coord&apos; can be declared with const" verbose="Parameter &apos;mic_coord&apos; can be declared with const" cwe="398" file0="../samples/athena_signal_aec_bf_agc_sample.c">
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="50" column="120" info="Parameter &apos;mic_coord&apos; can be declared with const"/>
+            <symbol>mic_coord</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_aec_bf_agc_sample.c">
+            <location file="../samples/athena_signal_aec_bf_agc_sample.c" line="129" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="knownConditionTrueFalse" severity="style" msg="Condition &apos;SSP_PARAM-&gt;ref_num==0&apos; is always false" verbose="Condition &apos;SSP_PARAM-&gt;ref_num==0&apos; is always false" cwe="570" file0="../samples/athena_signal_aec_sample.c">
+            <location file="../samples/athena_signal_aec_sample.c" line="61" column="32" info="Condition &apos;SSP_PARAM-&gt;ref_num==0&apos; is always false"/>
+            <location file="../samples/athena_signal_aec_sample.c" line="58" column="26" info="Assignment &apos;SSP_PARAM-&gt;ref_num=1&apos;, assigned value is 1"/>
+        </error>
+        <error id="redundantAssignment" severity="style" msg="Variable &apos;ret&apos; is reassigned a value before the old one has been used." verbose="Variable &apos;ret&apos; is reassigned a value before the old one has been used." cwe="563" file0="../samples/athena_signal_aec_sample.c">
+            <location file="../samples/athena_signal_aec_sample.c" line="106" column="13" info="ret is overwritten"/>
+            <location file="../samples/athena_signal_aec_sample.c" line="104" column="13" info="ret is assigned"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_aec_sample.c">
+            <location file="../samples/athena_signal_aec_sample.c" line="48" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;c&apos; can be reduced." verbose="The scope of the variable &apos;c&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_aec_sample.c">
+            <location file="../samples/athena_signal_aec_sample.c" line="176" column="9"/>
+            <symbol>c</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_aec_sample.c">
+            <location file="../samples/athena_signal_aec_sample.c" line="106" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_agc_sample.c">
+            <location file="../samples/athena_signal_agc_sample.c" line="47" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;c&apos; can be reduced." verbose="The scope of the variable &apos;c&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_agc_sample.c">
+            <location file="../samples/athena_signal_agc_sample.c" line="160" column="9"/>
+            <symbol>c</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_agc_sample.c">
+            <location file="../samples/athena_signal_agc_sample.c" line="96" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_bf_sample.c">
+            <location file="../samples/athena_signal_bf_sample.c" line="51" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../samples/athena_signal_bf_sample.c">
+            <location file="../samples/athena_signal_bf_sample.c" line="125" column="21" info="Shadow variable"/>
+            <location file="../samples/athena_signal_bf_sample.c" line="121" column="17" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;mic_coord&apos; can be declared with const" verbose="Parameter &apos;mic_coord&apos; can be declared with const" cwe="398" file0="../samples/athena_signal_bf_sample.c">
+            <location file="../samples/athena_signal_bf_sample.c" line="49" column="96" info="Parameter &apos;mic_coord&apos; can be declared with const"/>
+            <symbol>mic_coord</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_bf_sample.c">
+            <location file="../samples/athena_signal_bf_sample.c" line="117" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="48" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;c&apos; can be reduced." verbose="The scope of the variable &apos;c&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="206" column="9"/>
+            <symbol>c</symbol>
+        </error>
+        <error id="shadowVariable" severity="style" msg="Local variable &apos;j&apos; shadows outer variable" verbose="Local variable &apos;j&apos; shadows outer variable" cwe="398" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="119" column="21" info="Shadow variable"/>
+            <location file="../samples/athena_signal_doa_sample.c" line="115" column="17" info="Shadowed declaration"/>
+            <symbol>j</symbol>
+        </error>
+        <error id="constParameter" severity="style" msg="Parameter &apos;mic_coord&apos; can be declared with const" verbose="Parameter &apos;mic_coord&apos; can be declared with const" cwe="398" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="46" column="84" info="Parameter &apos;mic_coord&apos; can be declared with const"/>
+            <symbol>mic_coord</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="48" column="12"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_doa_sample.c">
+            <location file="../samples/athena_signal_doa_sample.c" line="111" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;ret&apos; can be reduced." verbose="The scope of the variable &apos;ret&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_hpf_sample.c">
+            <location file="../samples/athena_signal_hpf_sample.c" line="47" column="9"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="variableScope" severity="style" msg="The scope of the variable &apos;c&apos; can be reduced." verbose="The scope of the variable &apos;c&apos; can be reduced. Warning: Be careful when fixing this message, especially when there are inner loops. Here is an example where cppcheck will write that the scope for &apos;i&apos; can be reduced:\012void f(int x)\012{\012    int i = 0;\012    if (x) {\012        // it&apos;s safe to move &apos;int i = 0;&apos; here\012        for (int n = 0; n &lt; 10; ++n) {\012            // it is possible but not safe to move &apos;int i = 0;&apos; here\012            do_something(&amp;i);\012        }\012    }\012}\012When you see this message it is always safe to reduce the variable scope 1 level." cwe="398" file0="../samples/athena_signal_hpf_sample.c">
+            <location file="../samples/athena_signal_hpf_sample.c" line="161" column="9"/>
+            <symbol>c</symbol>
+        </error>
+        <error id="unreadVariable" severity="style" msg="Variable &apos;ret&apos; is assigned a value that is never used." verbose="Variable &apos;ret&apos; is assigned a value that is never used." cwe="563" file0="../samples/athena_signal_hpf_sample.c">
+            <location file="../samples/athena_signal_hpf_sample.c" line="96" column="13"/>
+            <symbol>ret</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_abs&apos; is never used." verbose="The function &apos;complex_abs&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="71" column="0"/>
+            <symbol>complex_abs</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_avg_vec&apos; is never used." verbose="The function &apos;complex_avg_vec&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="244" column="0"/>
+            <symbol>complex_avg_vec</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_div&apos; is never used." verbose="The function &apos;complex_div&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="195" column="0"/>
+            <symbol>complex_div</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_div2&apos; is never used." verbose="The function &apos;complex_div2&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="219" column="0"/>
+            <symbol>complex_div2</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_gen&apos; is never used." verbose="The function &apos;complex_gen&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="49" column="0"/>
+            <symbol>complex_gen</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;complex_sqrt&apos; is never used." verbose="The function &apos;complex_sqrt&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_share/dios_ssp_share_complex_defs.c" line="107" column="0"/>
+            <symbol>complex_sqrt</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;dios_ssp_mvdr_inv_delete&apos; is never used." verbose="The function &apos;dios_ssp_mvdr_inv_delete&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c" line="176" column="0"/>
+            <symbol>dios_ssp_mvdr_inv_delete</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;dios_ssp_mvdr_inv_init&apos; is never used." verbose="The function &apos;dios_ssp_mvdr_inv_init&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c" line="21" column="0"/>
+            <symbol>dios_ssp_mvdr_inv_init</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;dios_ssp_mvdr_inv_process&apos; is never used." verbose="The function &apos;dios_ssp_mvdr_inv_process&apos; is never used." cwe="561">
+            <location file="../athena_signal/kernels/dios_ssp_mvdr/dios_ssp_mvdr_cinv.c" line="51" column="0"/>
+            <symbol>dios_ssp_mvdr_inv_process</symbol>
+        </error>
+        <error id="unusedFunction" severity="style" msg="The function &apos;dios_ssp_v1&apos; is never used." verbose="The function &apos;dios_ssp_v1&apos; is never used." cwe="561">
+            <location file="../athena_signal/dios_signal.c" line="34" column="0"/>
+            <symbol>dios_ssp_v1</symbol>
+        </error>
+        <error id="missingInclude" severity="information" msg="Cppcheck cannot find all the include files (use --check-config for details)" verbose="Cppcheck cannot find all the include files. Cppcheck can check the code without the include files found. But the results will probably be more accurate if all the include files are found. Please check your project&apos;s include directories and add all of them as include directories for Cppcheck. To see what files Cppcheck cannot find use --check-config."/>
+    </errors>
+</results>

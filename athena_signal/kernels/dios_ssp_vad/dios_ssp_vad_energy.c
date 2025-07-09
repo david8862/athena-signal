@@ -430,6 +430,7 @@ int dios_ssp_energy_vad_process(void* energyvad_ptr, float *inbuf)
     int tmpi = 0;
     float tmpf = 0;
     float energ = 0.0f;
+#if 0
     float *nl_data = NULL;
     nl_data = (float *)calloc(FRM_LEN, sizeof(float));
     energ = 0;
@@ -440,6 +441,12 @@ int dios_ssp_energy_vad_process(void* energyvad_ptr, float *inbuf)
     }
     energ /= FRM_LEN;
     free(nl_data);
+#endif
+    for (j = 0; j < FRM_LEN; j++) {
+        energ += ((float)inbuf[j]) * ((float)inbuf[j]);
+    }
+    energ /= FRM_LEN;
+
     vad_param = (objENERGYVAD *)energyvad_ptr;
 
     int nlvad = dios_ssp_share_noiselevel_process(vad_param->energyvad_noise_est, energ);

@@ -159,7 +159,8 @@ int athena_signal_doa_sample(char* input_file, int chunk_size, int mic_num, floa
     free(ptr_output_data);
     free(ptr_ref_data);
     free(SSP_PARAM);
-    return 0;
+
+    return (int)angle;
 }
 
 
@@ -202,6 +203,7 @@ int main(int argc, char** argv)
     int mic_num = 3;
     char mic_coord_file[MAX_STR_LEN] = "mic_coord.txt";
     float* mic_coord;
+    int ret = 0;
 
     int c;
     while (1) {
@@ -249,11 +251,11 @@ int main(int argc, char** argv)
     parse_mic_coord(mic_coord_file, mic_coord, mic_num);
 
     printf("NOTE: Athena-signal lib only support 16k sample rate, 16-bit audio data!\n");
-    athena_signal_doa_sample(input_file, chunk_size, mic_num, mic_coord);
+    ret = athena_signal_doa_sample(input_file, chunk_size, mic_num, mic_coord);
 
     free(mic_coord);
     printf("\nProcess finished.\n");
 
-    return 0;
+    return ret;
 }
 

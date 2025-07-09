@@ -66,6 +66,7 @@ int dios_ssp_mvdr_uninit_api(void *ptr)
 	objMVDR *ptr_mvdr;
 	ptr_mvdr= (objMVDR*)ptr;
 	dios_ssp_mvdr_delete(ptr_mvdr);
-	
+    free(ptr_mvdr);
+
 	return 0;
 }

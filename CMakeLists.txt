@@ -109,8 +109,13 @@ install(FILES ${LIBATHENASIGNAL_VAD_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR
 set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample athena_signal_hpf_sample athena_signal_aec_bf_agc_sample)
 install(TARGETS ${ATHENASIGNAL_SAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/samples)
 
-# install stress test data & scripts
+# install stress test data, scripts and tools
 file(GLOB ATHENASIGNAL_TEST_DATA ${CMAKE_HOME_DIRECTORY}/testing/data/*)
 file(GLOB ATHENASIGNAL_TEST_SCRIPTS ${CMAKE_HOME_DIRECTORY}/testing/*.sh)
 install(FILES ${ATHENASIGNAL_TEST_DATA} DESTINATION ${CMAKE_INSTALL_PREFIX}/testing/data/)
 install(FILES ${ATHENASIGNAL_TEST_SCRIPTS} DESTINATION ${CMAKE_INSTALL_PREFIX}/testing/)
+
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm|aarch64")
+    file(GLOB BC_TOOL ${CMAKE_HOME_DIRECTORY}/testing/tools/${CMAKE_SYSTEM_PROCESSOR}/bc/bin/bc)
+    install(FILES ${BC_TOOL} DESTINATION ${CMAKE_INSTALL_PREFIX}/testing/tools/)
+endif()

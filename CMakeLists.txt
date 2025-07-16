@@ -2,8 +2,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(AthenaSignal LANGUAGES C)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-SET(CMAKE_BUILD_TYPE "Debug")
-#SET(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_BUILD_TYPE "Debug")
+#set(CMAKE_BUILD_TYPE "Release")
 
 # ---[ AthenaSignal version
 set(ATHENASIGNAL_TARGET_VERSION   "1.0.0"  CACHE STRING "AthenaSignal logical version")
@@ -19,6 +19,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 # https://www.zhihu.com/question/27090458
 # https://blog.csdn.net/m0_37870649/article/details/109139204
 option(ATHENASIGNAL_BUILD_FAST "build lib & binary with gcc -Ofast optimization" OFF)
+option(ATHENASIGNAL_BUILD_SHARED_LIBS "build shared or static lib" OFF)
 option(ATHENASIGNAL_BUILD_TEST_COVERAGE "build lib & binary for test coverage" OFF)
 option(ATHENASIGNAL_BUILD_ASAN "build lib & binary for asan analysis" OFF)
 option(ATHENASIGNAL_BUILD_FOR_GPROF "build lib & binary for gprof analysis" OFF)
@@ -55,7 +56,11 @@ set(LIBATHENASIGNAL athenasignal)
 
 file(GLOB_RECURSE LIBATHENASIGNAL_SRCS    ${CMAKE_HOME_DIRECTORY}/athena_signal/kernels/*.c)
 
-add_library(${LIBATHENASIGNAL} SHARED ${LIBATHENASIGNAL_SRCS})
+if(ATHENASIGNAL_BUILD_SHARED_LIBS)
+    add_library(${LIBATHENASIGNAL} SHARED ${LIBATHENASIGNAL_SRCS})
+else()
+    add_library(${LIBATHENASIGNAL} STATIC ${LIBATHENASIGNAL_SRCS})
+endif()
 target_include_directories(${LIBATHENASIGNAL} PUBLIC ${CMAKE_HOME_DIRECTORY}/athena_signal/)
 
 

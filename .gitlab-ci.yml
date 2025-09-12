@@ -1,0 +1,114 @@
+#image: gitlab3.roborock.com:4567/ml/speechengine:20221008
+variables:
+  DOCKER_AUTH_CONFIG: "{\"auths\": {\"gitlab1.roborock.com:4567\": {\"auth\": \"$docker_auth_token\"}}}"
+  DOGFOOD_ARCHIVE: "athena-signal_$CI_COMMIT_SHORT_SHA"
+
+
+default:
+  tags:
+  - athena-signal
+  timeout: 3 hours 30 minutes
+
+image: gcc:10.2.0-v3
+
+stages:
+  - Check
+#  - Unit_test
+#  - Build
+
+
+ClangFormat:
+  stage: Check
+  except:
+     - /^dogfood-.*$/
+  script:
+    - bash ./scripts/clang_format_check.sh
+  needs: []
+
+UNIT_TEST:
+  stage: Unit_test
+  except:
+     - /^dogfood-.*$/
+  script:
+    - bash ./testing/unit_test/unit_test.sh
+  coverage: /^TOTAL.*\s+(\d+\%)$/
+  artifacts:
+    name: "unit test report"
+    untracked: false
+    expire_in: never
+    paths:
+      - build/coverage_outputs/html/coverage.html
+      - build/coverage_outputs/txt/coverage.txt
+  needs: []
+
+
+PC_X86:
+  stage: Build
+  except:
+     - /^dogfood-.*$/
+  script:
+    - bash ./scripts/build_x86_64_ship.sh
+    - tar cvf PC_X86.tar build/install
+  artifacts:
+    name: "PC_X86"
+    untracked: false
+    expire_in: never
+    paths:
+      - PC_X86.tar
+  needs: [UNIT_TEST]
+
+
+Pearlplus_MR813:
+  stage: Build
+  except:
+     - /^dogfood-.*$/
+  script:
+    - bash ./scripts/build_mr813_ship.sh
+    - tar cvf Pearlplus_MR813.tar build_mr813/install
+  artifacts:
+    name: "Pearlplus_MR813"
+    untracked: false
+    expire_in: never
+    paths:
+      - Pearlplus_MR813.tar
+  needs: [UNIT_TEST]
+
+
+UltronSV_MR527:
+  stage: Build
+  except:
+     - /^dogfood-.*$/
+  script:
+    - bash ./scripts/build_mr527_ship.sh
+    - tar cvf UltronSV_MR527.tar build_mr527/install
+  artifacts:
+    name: "UltronSV_MR527"
+    untracked: false
+    expire_in: never
+    paths:
+      - UltronSV_MR527.tar
+  needs: [UNIT_TEST]
+
+
+Build-Dogfood:
+  stage: Build
+  only:
+    - /^dogfood-.*$/
+  script:
+    - mkdir archive
+    - rm -rf build
+    - bash ./scripts/build_x86_64_ship.sh
+    - tar cvf archive/x86_64.tar build/install
+    - rm -rf build_mr813
+    - bash ./scripts/build_mr813_ship.sh
+    - tar cvf archive/mr813.tar build_mr813/install
+    - rm -rf build_mr527
+    - bash ./scripts/build_mr527_ship.sh
+    - tar cvf archive/mr527.tar build_mr527/install
+    - cp -drf test_audios archive
+    - tar cvf $DOGFOOD_ARCHIVE.tar archive
+    - |
+      sftp -i /etc/ssh/anny_rsa annyfiles@192.168.50.238 <<EOF
+        put $DOGFOOD_ARCHIVE.tar uploads_annyfiles/
+        quit
+      EOF

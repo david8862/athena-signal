@@ -26,6 +26,15 @@
 #
 #    now the target platform bc will be under "--prefix" path
 #
+# you can also choose to download GNU bc source code and compile with Makefile if needed:
+#    wget https://ftp.gnu.org/gnu/bc/bc-1.08.2.tar.gz
+#    tar xzvf bc-1.08.2.tar.gz
+#    cd bc-1.08.2/
+#    ./configure
+#    make
+#
+#    now the built bc binary will be under "bc" path
+#
 #
 # NOTE: This stress test script will be installed in and should be run at "build/install" dir!
 #

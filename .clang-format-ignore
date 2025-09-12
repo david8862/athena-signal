@@ -1,0 +1,12 @@
+# example audio & scripts
+./examples/*
+
+# build scripts
+./scripts/*
+
+# testing resources
+./testing/*
+
+# build generations
+./build/*
+

@@ -98,6 +98,10 @@ int athena_signal_aec_sample(char* input_file, char* ref_file, int chunk_size, c
     short* ptr_ref_data = (short*)calloc(chunk_size, sizeof(short));
     short* ptr_output_data = (short*)calloc(ATHENA_SIGNAL_FRAME_SIZE, sizeof(short));
 
+    // read out wav header (usually 44 bytes) to bypass it
+    fread(ptr_input_data, 1, 44, fp_input);
+    fread(ptr_ref_data, 1, 44, fp_ref);
+
     // signal processing here
     for(long i=0; i < chunk_num; i++) {
         // read mixed audio data from input file

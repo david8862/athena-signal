@@ -102,6 +102,9 @@ int athena_signal_doa_sample(char* input_file, int chunk_size, int mic_num, floa
     short* ptr_ref_data = (short*)calloc(chunk_size, sizeof(short));
     short* ptr_output_data = (short*)calloc(ATHENA_SIGNAL_FRAME_SIZE, sizeof(short));
 
+    // read out wav header (usually 44 bytes) to bypass it
+    fread(ptr_temp, 1, 44, fp_input);
+
     // set ref signal as 0 (DOA don't need it)
     memset(ptr_ref_data, 0, chunk_size*sizeof(short));
 

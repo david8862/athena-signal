@@ -140,9 +140,9 @@ int athena_signal_aec_bf_agc_sample(char* input_file, char* ref_file, int chunk_
             // since layout of multi-channel audio data in .wav audio is interleave,
             // but athena-signal lib only handle non-interleave layout data,
             // so we need convert audio data from interleave to non-interleave
-            for(int j=0; j < ATHENA_SIGNAL_FRAME_SIZE; j++) {
-                for(int k=0; k < mic_num; k++) {
-                    ptr_input_data[j+k*ATHENA_SIGNAL_FRAME_SIZE] = ptr_tmp_input[mic_num*j+k];
+            for(int k=0; k < ATHENA_SIGNAL_FRAME_SIZE; k++) {
+                for(int l=0; l < mic_num; l++) {
+                    ptr_input_data[k+l*ATHENA_SIGNAL_FRAME_SIZE] = ptr_tmp_input[mic_num*k+l];
                 }
             }
 

@@ -111,7 +111,7 @@ install(FILES ${LIBATHENASIGNAL_MVDR_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDI
 install(FILES ${LIBATHENASIGNAL_NS_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_ns)
 install(FILES ${LIBATHENASIGNAL_VAD_HDRS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/dios_ssp_vad)
 
-set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample athena_signal_hpf_sample athena_signal_aec_bf_agc_sample)
+set(ATHENASIGNAL_SAMPLES athena_signal_bf_sample athena_signal_doa_sample athena_signal_aec_sample athena_signal_agc_sample athena_signal_vad_sample athena_signal_hpf_sample athena_signal_aec_bf_agc_sample)
 install(TARGETS ${ATHENASIGNAL_SAMPLES} DESTINATION ${CMAKE_INSTALL_BINDIR}/samples)
 
 # install stress test data, scripts and tools

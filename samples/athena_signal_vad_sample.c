@@ -8,7 +8,7 @@
 // Usage: athena_signal_vad_sample
 // --input_file, -i: input raw audio file. default: 'input.wav'
 // --chunk_size,  -c: audio chunk size to read every time. default: 640
-// --output_file, -o: output txt file for voice segment start & stop time (in seconds). default: output.txt
+// --output_file, -o: output txt file for voice timestamps. default: output.txt
 //
 // $ ./athena_signal_vad_sample -i vad_input.wav -o vad_output.txt
 //
@@ -81,6 +81,19 @@ int athena_signal_vad_sample(char* input_file, int chunk_size, char* output_file
     // re-direct file pointer back to head
     rewind(fp_input);
 
+    // output voice timestamps txt file would be like:
+    // cat output.txt
+    // 16000               // sample rate
+    // 8525.995            // total duration time (in seconds)
+    // 197.949,199.200     // voice start/stop time (in seconds)
+    // 200.159,202.829
+    // ...
+    //
+    // write sample rate & audio duration time
+    float audio_duration = (float)(sample_num) / 16000.0;
+    fprintf(fp_output, "%d\n", 16000);
+    fprintf(fp_output, "%.3f\n", audio_duration);
+
     // calculate audio chunk number based on chunk size
     long chunk_num = sample_num / chunk_size;
     int tail_num = sample_num % chunk_size;
@@ -131,7 +144,7 @@ int athena_signal_vad_sample(char* input_file, int chunk_size, char* output_file
                 } else if ((prev_vad_status == 1) && (vad_status == 0)) {
                     // found VAD stop point, write the segment start & stop time into output file
                     voice_stop_time = ((float)(i*chunk_size + j*ATHENA_SIGNAL_FRAME_SIZE)) / (float)(ATHENA_SIGNAL_SAMPLE_RATE);
-                    fprintf(fp_output, "%f,%f\n", voice_start_time, voice_stop_time);
+                    fprintf(fp_output, "%.3f,%.3f\n", voice_start_time, voice_stop_time);
                     // reset status
                     prev_vad_status = vad_status;
                     voice_start_time = 0.0;
@@ -167,7 +180,7 @@ void display_usage()
     printf("Usage: athena_signal_vad_sample\n" \
            "--input_file, -i: input raw audio file. default: 'input.wav'\n" \
            "--chunk_size,  -c: audio chunk size to read every time. default: 640\n" \
-           "--output_file, -o: output txt file for voice segment start & stop time (in seconds). default: output.txt\n" \
+           "--output_file, -o: output txt file for voice timestamps. default: output.txt\n" \
            "\n");
     return;
 }
